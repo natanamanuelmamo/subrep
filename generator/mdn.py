@@ -18,6 +18,7 @@ class MotiveDecompositionNetwork(nn.Module):
         alpha_epsilon: float = 1e-6,
         num_skills: int = 128,
         skill_embedding_dim: int = 8,
+        slack_floor: float = 0.02,
     ) -> None:
         super().__init__()
 
@@ -27,6 +28,8 @@ class MotiveDecompositionNetwork(nn.Module):
             )
         if num_skills <= 0:
             raise ValueError(f"Expected num_skills > 0, got {num_skills}")
+        if not (0.0 <= slack_floor < 1.0):
+            raise ValueError(f"slack_floor must be in [0, 1), got {slack_floor}")
 
         self.input_dim = input_dim
         self.num_objectives = num_objectives
@@ -35,6 +38,7 @@ class MotiveDecompositionNetwork(nn.Module):
         self.alpha_epsilon = alpha_epsilon
         self.num_skills = num_skills
         self.skill_embedding_dim = skill_embedding_dim
+        self.slack_floor = float(slack_floor)
 
         trunk_layers: list[nn.Module] = [
             nn.Linear(input_dim, hidden_dim),
@@ -50,7 +54,8 @@ class MotiveDecompositionNetwork(nn.Module):
 
         self.trunk = nn.Sequential(*trunk_layers)
         self.distribution_head = nn.Linear(hidden_dim, num_objectives)
-        self.support_head = nn.Linear(hidden_dim, num_objectives)
+        # SASP: first M logits = base allocation, last M = slack gates.
+        self.support_head = nn.Linear(hidden_dim, 2 * num_objectives)
         self.skill_embedding = nn.Embedding(num_skills, skill_embedding_dim)
         self.auxiliary_fusion = nn.Sequential(
             nn.Linear(hidden_dim + skill_embedding_dim, hidden_dim),
@@ -59,7 +64,6 @@ class MotiveDecompositionNetwork(nn.Module):
         self.gate_head = nn.Linear(hidden_dim, 1)
         self.motive_head = nn.Linear(hidden_dim, num_objectives)
         self.softplus = nn.Softplus()
-        self.support_activation = nn.Softplus()
 
         self._initialize_weights()
 
@@ -96,13 +100,29 @@ class MotiveDecompositionNetwork(nn.Module):
         return features, is_single_input
 
     def _support_values_from_raw(self, raw_support: Tensor) -> Tensor:
-        if self.num_objectives != 2:
-            return self.support_activation(raw_support)
+        """Softmax-Anchored Slack Parameterization (SASP).
 
-        lower = torch.sigmoid(raw_support[..., 0])
-        width_fraction = torch.sigmoid(raw_support[..., 1])
-        upper = lower + width_fraction * (1.0 - lower)
-        return torch.stack((upper, 1.0 - lower), dim=-1)
+        s_i = p_i + (1 - p_i) * g_i
+          p = softmax(base logits)              -> sum(p) == 1, p_i in (0, 1)
+          g = g_min + (1 - g_min) * sigmoid(logits) -> g_i in (g_min, 1)
+
+        Guarantees, for any num_objectives M and any weights:
+          0 < s_i < 1  and  sum(s) >= 1.
+        """
+        num_objectives = self.num_objectives
+        if raw_support.shape[-1] != 2 * num_objectives:
+            raise ValueError(
+                f"support head must emit 2*M={2 * num_objectives} logits, "
+                f"got {raw_support.shape[-1]}"
+            )
+
+        base_logits = raw_support[..., :num_objectives]
+        slack_logits = raw_support[..., num_objectives:]
+        base_allocation = torch.softmax(base_logits, dim=-1)
+        slack_gate = self.slack_floor + (1.0 - self.slack_floor) * torch.sigmoid(
+            slack_logits
+        )
+        return base_allocation + (1.0 - base_allocation) * slack_gate
 
     def forward_inference(self, context: Tensor) -> tuple[Tensor, Tensor]:
         features, is_single_input = self._encode_context(context)

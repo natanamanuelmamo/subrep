@@ -80,21 +80,78 @@ def test_mdn_two_objective_support_values_are_feasible_for_batched_contexts():
     assert torch.all(torch.sum(support_values, dim=-1) >= 1.0)
 
 
-def test_mdn_non_two_objective_support_values_keep_softplus_path():
-    """Non-2D support outputs should preserve the existing Softplus behavior."""
+@pytest.mark.parametrize("num_objectives", [2, 3, 5, 10, 50])
+def test_mdn_support_values_feasible_for_any_M(num_objectives: int):
+    """SASP must produce feasible support values for any objective count."""
     torch.manual_seed(0)
-    model = MotiveDecompositionNetwork(num_objectives=3)
-    with torch.no_grad():
-        model.support_head.weight.zero_()
-        model.support_head.bias.copy_(torch.tensor([2.0, 0.0, -2.0]))
-    context = torch.randn(4, 8)
+    model = MotiveDecompositionNetwork(num_objectives=num_objectives)
+    context = torch.randn(64, 8) * 10.0
 
     _, support_values = model.forward_inference(context)
-    expected = torch.nn.functional.softplus(model.support_head.bias).expand_as(support_values)
 
-    assert support_values.shape == (4, 3)
-    assert torch.allclose(support_values, expected)
-    assert torch.any(support_values > 1.0)
+    assert support_values.shape == (64, num_objectives)
+    assert torch.all(support_values >= 0)
+    assert torch.all(support_values <= 1)
+    assert torch.all(torch.sum(support_values, dim=-1) >= 1.0 - 1e-6)
+
+
+def test_sasp_hard_guarantee_with_extreme_logits():
+    """SASP feasibility must hold even for extreme raw logits."""
+    torch.manual_seed(0)
+    model = MotiveDecompositionNetwork(num_objectives=5)
+
+    for scale in (1.0, 10.0, 50.0):
+        raw = torch.randn(128, 10) * scale
+        support_values = model._support_values_from_raw(raw)
+        assert torch.all(support_values >= 0)
+        assert torch.all(support_values <= 1)
+        assert torch.all(torch.sum(support_values, dim=-1) >= 1.0 - 1e-6)
+
+
+def test_sasp_is_permutation_equivariant():
+    """Permuting objective indices must permute SASP outputs identically."""
+    torch.manual_seed(0)
+    model = MotiveDecompositionNetwork(num_objectives=5)
+    raw = torch.randn(16, 10)
+    perm = torch.randperm(5)
+    permuted_raw = torch.cat(
+        [raw[..., :5][..., perm], raw[..., 5:][..., perm]],
+        dim=-1,
+    )
+
+    support_values = model._support_values_from_raw(raw)
+    permuted_support_values = model._support_values_from_raw(permuted_raw)
+
+    assert torch.allclose(support_values[..., perm], permuted_support_values, atol=1e-6)
+
+
+def test_sasp_surjectivity_round_trip():
+    """Every feasible target must be reconstructible via analytic SASP witnesses."""
+    torch.manual_seed(0)
+    model = MotiveDecompositionNetwork(num_objectives=4)
+
+    for _ in range(32):
+        target = torch.rand(4)
+        target = target / target.sum() * torch.empty(()).uniform_(1.0, 1.8)
+        target = torch.clamp(target, min=1e-4, max=1.0 - 1e-4)
+
+        total = target.sum()
+        base_allocation = target / total
+        slack_gate = (target - base_allocation) / (1.0 - base_allocation)
+        slack_gate = torch.clamp(slack_gate, min=1e-6, max=1.0 - 1e-6)
+
+        base_logits = torch.log(base_allocation)
+        slack_logits = torch.log(slack_gate / (1.0 - slack_gate))
+        raw = torch.cat([base_logits, slack_logits])
+
+        reconstructed = model._support_values_from_raw(raw.unsqueeze(0)).squeeze(0)
+        assert torch.allclose(reconstructed, target, atol=1e-5)
+
+
+def test_mdn_rejects_invalid_slack_floor():
+    """slack_floor must lie in [0, 1)."""
+    with pytest.raises(ValueError, match="slack_floor"):
+        MotiveDecompositionNetwork(slack_floor=1.0)
 
 
 def test_mdn_outputs_are_finite():
