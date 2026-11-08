@@ -80,6 +80,18 @@ NOOP_BASELINE = CandidatePolicy("noop", _fixed_action_policy(0))
 # small that the next non-zero outcome saturates every stimulus.
 APPRAISAL_SCALE_FLOOR = 10.0
 
+# Environment units per unit of MetaMo's PDS epsilon, for
+# `bridge.epsilon_scale.GuardedEpsilonScale`. It is s_r + s_n
+# (`bridge.epsilon_scale.calibrate_epsilon_scale`), pooled over the extended
+# candidate set (data_collector/collect_candidate_sets.py,
+# build_extended_candidate_policies) on seeds 1-20, uncapped, gamma = 1:
+# s_r = 50.0, s_n = 250.1. Pooled, it moves at most 5% when any one seed is
+# left out (experiments/epsilon_scale/e2_scale_stability.py). With it,
+# epsilon = 0.1 tolerates a 30-unit worst case and epsilon = 0.5 a 150-unit
+# one, for candidates that do not crash. Not used unless a controller is
+# given an epsilon scale.
+EPSILON_SCALE = 300.0
+
 
 def _policy_callable(policy: Any) -> Any:
     """The callable behind a `CandidatePolicy`, or `policy` itself."""

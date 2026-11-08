@@ -55,6 +55,9 @@ class StepRecord:
     selected_skill_id: Optional[str] = None
     selected_score: Optional[float] = None
     seed: Optional[int] = None
+    # Environment units per unit of epsilon when the controller was given an
+    # epsilon scale (bridge/epsilon_scale.py); None means raw epsilon.
+    epsilon_scale: Optional[float] = None
 
     def as_row(self) -> str:
         """Compact single-line summary."""
@@ -83,10 +86,20 @@ class MetaMoController:
         pipeline: Any,
         *,
         seed: int = 42,
+        epsilon_scale: Optional[Any] = None,
     ) -> None:
+        """
+        Args:
+            epsilon_scale: optional `bridge.epsilon_scale.GuardedEpsilonScale`
+                (or anything with the same `epsilon_for` method). When given,
+                each candidate's PDS epsilon is converted into environment
+                units before certification. None (the default) stamps MetaMo's
+                epsilon unchanged, exactly as before.
+        """
         self.governor = governor
         self.pipeline = pipeline
         self.seed = int(seed)
+        self.epsilon_scale = epsilon_scale
         self.history: List[StepRecord] = []
         self._step_index = 0
 
@@ -114,10 +127,27 @@ class MetaMoController:
         effective_seed = self.seed if seed is None else int(seed)
         _seed_torch(effective_seed)
 
-        budgeted = [
-            _with_epsilon(candidate, signal.pds_epsilon)
-            for candidate in candidate_skills
-        ]
+        if self.epsilon_scale is None:
+            budgeted = [
+                _with_epsilon(candidate, signal.pds_epsilon)
+                for candidate in candidate_skills
+            ]
+        else:
+            # The pipeline resolves epsilon per record, so each candidate can
+            # carry its own: scaled for candidates that do the task, raw for
+            # those that fail it (bridge/epsilon_scale.py).
+            baseline_payoff = baseline_stats.get("baseline_payoff")
+            budgeted = [
+                _with_epsilon(
+                    candidate,
+                    self.epsilon_scale.epsilon_for(
+                        signal.pds_epsilon,
+                        delta_r=getattr(candidate, "delta_r", None),
+                        baseline_payoff=baseline_payoff,
+                    ),
+                )
+                for candidate in candidate_skills
+            ]
 
         return self.pipeline.certify_candidate_skills(
             context=np.asarray(context),
@@ -208,6 +238,10 @@ class MetaMoController:
             selected_skill_id=skill_id,
             selected_score=score,
             seed=effective_seed,
+            epsilon_scale=(
+                None if self.epsilon_scale is None
+                else float(getattr(self.epsilon_scale, "scale", float("nan")))
+            ),
         )
         self.history.append(record)
         self._step_index += 1

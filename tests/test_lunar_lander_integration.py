@@ -250,12 +250,13 @@ def test_crash_only_candidates_are_rejected_and_the_loop_abstains(ci_run):
 
 
 def test_epsilon_cannot_change_a_lunar_lander_admission(ci_run):
-    """Records the risk-budget scale on MO-LunarLander.
+    """Records the risk-budget scale on MO-LunarLander WITHOUT an epsilon scale.
 
     Every CI candidate's PDS margin (delta_r + min delta_n) lies below
-    -EPSILON_MAX, the loosest budget MetaMo can emit, so no epsilon could admit
-    it. If objective changes are normalised later, this test is expected to
-    fail and should be updated together with that change.
+    -EPSILON_MAX, the loosest budget MetaMo can emit, so no raw epsilon could
+    admit it. This is the controller's default behaviour; with an epsilon
+    scale (bridge/epsilon_scale.py) epsilon can decide an admission -- see
+    test_epsilon_can_change_a_lunar_lander_admission_with_the_scale.
     """
     _, _, records_per_step = ci_run
 
@@ -266,6 +267,117 @@ def test_epsilon_cannot_change_a_lunar_lander_admission(ci_run):
     ]
     assert margins
     assert max(margins) < -EPSILON_MAX
+
+
+class _FuelWastingPilot:
+    """PPO that fires the left then the right side engine instead of coasting,
+    with probability p -- it still lands, but burns extra fuel. Defined here,
+    not in shared code: a borderline candidate for the epsilon-scale tests."""
+
+    def __init__(self, pilot, p: float) -> None:
+        self.pilot = pilot
+        self.p = float(p)
+        self.rng = np.random.default_rng(0)
+        self.pending = None
+
+    def reset(self, seed=None, **_kwargs) -> None:
+        self.rng = np.random.default_rng((0 if seed is None else int(seed)) + 104729)
+        self.pending = None
+
+    def __call__(self, obs):
+        if self.pending is not None:
+            action, self.pending = self.pending, None
+            return action, 1.0
+        out = self.pilot.predict(obs, deterministic=True, return_probability=True)
+        action = int(out[0] if isinstance(out, tuple) else out)
+        if action == 0 and self.rng.random() < self.p:
+            self.pending = 3
+            return 1, 1.0
+        return action, 1.0
+
+
+# Seed on which the fuel-wasting pilot lands with margin delta_r + min delta_n
+# = 200 - 243 = -43 against the crashing noop baseline
+# (experiments/epsilon_scale, tradeoff candidate set).
+BORDERLINE_SEED = 8
+
+
+def _scripted_epsilon_loop(epsilons, epsilon_scale):
+    """Certify the CI candidates plus the fuel-wasting pilot on BORDERLINE_SEED,
+    once per scripted epsilon, through the real controller and pipeline.
+    Returns the admitted skill ids per step and the scored records."""
+    from bridge.controller import MetaMoController
+    from bridge.governor import FakeGovernor
+    from bridge.protocol import GovernorSignal
+    from pilot.rl_pilot import RLPilot
+
+    env = SubRepEnv(seed=BORDERLINE_SEED)
+    try:
+        pilot = RLPilot.load(str(PILOT_CHECKPOINT), map_location="cpu")
+        pilot.eval()
+        candidates = ci_candidates(env) + (
+            CandidatePolicy("ppo_waste_side_15", _FuelWastingPilot(pilot, 0.15)),
+        )
+        baseline_stats, records = evaluate_candidates(env, candidates, seed=BORDERLINE_SEED)
+        signals = [
+            GovernorSignal(weights=np.array([0.5, 0.5]), pds_epsilon=e, cvar_tail_level=0.1)
+            for e in epsilons
+        ]
+        controller = MetaMoController(
+            FakeGovernor(signals), make_pipeline(), seed=CONTROLLER_SEED,
+            epsilon_scale=epsilon_scale,
+        )
+        admitted_per_step = []
+        for signal in signals:
+            certified = controller.certify(
+                context=np.asarray(baseline_stats["info"]["start_obs"]),
+                candidate_skills=records,
+                baseline_stats=baseline_stats,
+                signal=signal,
+            )
+            admitted_per_step.append({r.skill_id for r in certified if r.is_certified})
+    finally:
+        env.close()
+    return admitted_per_step, records
+
+
+@requires_pilot
+def test_epsilon_can_change_a_lunar_lander_admission_with_the_scale():
+    """With the guarded epsilon scale, MetaMo's epsilon decides a real
+    LunarLander trade-off -- a landing that burns extra fuel -- while every
+    crashing candidate stays rejected at every epsilon. Without the scale the
+    same records give the same verdict at every epsilon."""
+    from bridge.epsilon_scale import GuardedEpsilonScale
+    from env.lunar_lander_rollout import EPSILON_SCALE
+
+    epsilons = (0.5, 0.3, 0.2, 0.1, 0.0)
+    scaled, records = _scripted_epsilon_loop(epsilons, GuardedEpsilonScale(scale=EPSILON_SCALE))
+    raw, _ = _scripted_epsilon_loop(epsilons, None)
+
+    by_id = {r.skill_id: r for r in records}
+    waste = by_id["ppo_waste_side_15"]
+    assert waste.metadata["landing_success"]
+    margin = float(waste.delta_r) + float(np.min(waste.delta_n))
+    assert -0.5 * EPSILON_SCALE < margin < -0.1 * EPSILON_SCALE
+
+    # Admitted at loose budgets, rejected once epsilon * scale < -margin.
+    assert ["ppo_waste_side_15" in s for s in scaled] == [
+        e * EPSILON_SCALE >= -margin for e in epsilons
+    ]
+    assert any("ppo_waste_side_15" in s for s in scaled)
+    assert not all("ppo_waste_side_15" in s for s in scaled)
+
+    # Crashes never pass, with or without the scale.
+    crashed = {r.skill_id for r in records if r.metadata["crashed"] and not r.metadata["landing_success"]}
+    assert crashed >= {"left_engine", "main_engine", "right_engine"}
+    for admitted in scaled + raw:
+        assert not (admitted & crashed)
+
+    # Without the scale, epsilon changes nothing.
+    assert all(s == raw[0] for s in raw)
+    # Monotonic over the decreasing script.
+    for looser, tighter in zip(scaled, scaled[1:]):
+        assert tighter <= looser
 
 
 def test_the_same_seeds_reproduce_the_same_run(ci_run):
