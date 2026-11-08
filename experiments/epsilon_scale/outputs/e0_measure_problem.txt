@@ -1,0 +1,385 @@
+﻿
+==========================================================================
+E0 -- the epsilon-scale problem in raw units (seeds 1-40, baseline = noop)
+==========================================================================
+baseline (noop) outcomes over 40 seeds: landed=0 crashed=40 timeout=0
+objectives: ['Safety', 'Fuel']; margin = delta_r + min_i delta_n_i; admit iff margin >= -eps; eps band = [-0.5, 0]
+
+======================================
+Per candidate-seed pair (extended set)
+======================================
+seed  candidate               dr       dn_Safety  dn_Fuel   margin     outcome  steps
+----  ----------------------  -------  ---------  --------  ---------  -------  -----
+   1  ppo_deterministic       200.000    326.026   -91.000    109.000  landed     205
+   1  ppo_stochastic          200.000    321.747  -100.000    100.000  landed     195
+   1  left_engine               0.000   -696.950   -79.000   -696.950  crashed     79
+   1  main_engine               0.000   -771.728  -118.000   -771.728  crashed    118
+   1  right_engine              0.000   -491.039   -78.000   -491.039  crashed     78
+   1  random                    0.000    -47.576   -79.000    -79.000  crashed     99
+   1  ppo_then_side_tradeoff    0.000   -274.301   -56.000   -274.301  crashed     81
+   1  ppo_noisy_actions         0.000     67.873   -65.000    -65.000  crashed    106
+   2  ppo_deterministic       200.000    208.491   -86.000    114.000  landed     193
+   2  ppo_stochastic          200.000    206.780   -88.000    112.000  landed     185
+   2  left_engine               0.000   -656.916   -73.000   -656.916  crashed     73
+   2  main_engine               0.000  -2.81e+03  -289.000  -2.81e+03  crashed    289
+   2  right_engine              0.000   -537.221   -72.000   -537.221  crashed     72
+   2  random                    0.000   -228.601   -86.000   -228.601  crashed    106
+   2  ppo_then_side_tradeoff    0.000   -236.866   -46.000   -236.866  crashed     74
+   2  ppo_noisy_actions         0.000    -52.856   -53.000    -53.000  crashed     90
+   3  ppo_deterministic       200.000    202.975   -83.000    117.000  landed     202
+   3  ppo_stochastic          200.000    200.986   -91.000    109.000  landed     194
+   3  left_engine               0.000   -485.873   -70.000   -485.873  crashed     70
+   3  main_engine               0.000  -1.17e+03  -160.000  -1.17e+03  crashed    160
+   3  right_engine              0.000   -451.573   -69.000   -451.573  crashed     69
+   3  random                    0.000    -90.322   -75.000    -90.322  crashed     99
+   3  ppo_then_side_tradeoff    0.000   -234.712   -43.000   -234.712  crashed     71
+   3  ppo_noisy_actions         0.000     -0.005   -57.000    -57.000  crashed     90
+   4  ppo_deterministic       200.000    206.683   -88.000    112.000  landed     196
+   4  ppo_stochastic          200.000    201.341   -96.000    104.000  landed     205
+   4  left_engine               0.000   -729.979   -76.000   -729.979  crashed     76
+   4  main_engine               0.000  -1.06e+03  -127.000  -1.06e+03  crashed    127
+   4  right_engine              0.000   -625.722   -78.000   -625.722  crashed     78
+   4  random                    0.000   -172.219   -89.000   -172.219  crashed    114
+   4  ppo_then_side_tradeoff    0.000   -344.796   -51.000   -344.796  crashed     79
+   4  ppo_noisy_actions         0.000      3.400   -58.000    -58.000  crashed     98
+   5  ppo_deterministic       200.000    201.555   -99.000    101.000  landed     216
+   5  ppo_stochastic          200.000    204.894   -93.000    107.000  landed     194
+   5  left_engine               0.000   -900.339   -86.000   -900.339  crashed     86
+   5  main_engine               0.000  -3.47e+03  -322.000  -3.47e+03  crashed    322
+   5  right_engine              0.000   -857.545   -86.000   -857.545  crashed     86
+   5  random                    0.000   -116.180   -85.000   -116.180  crashed    117
+   5  ppo_then_side_tradeoff    0.000   -392.825   -60.000   -392.825  crashed     88
+   5  ppo_noisy_actions         0.000    -85.135   -58.000    -85.135  crashed    105
+   6  ppo_deterministic       200.000    400.288  -143.000     57.000  landed     258
+   6  ppo_stochastic          200.000    404.331  -144.000     56.000  landed     255
+   6  left_engine               0.000   -878.827   -87.000   -878.827  crashed     87
+   6  main_engine               0.000   -559.782   -74.000   -559.782  crashed     74
+   6  right_engine              0.000   -710.745   -88.000   -710.745  crashed     88
+   6  random                    0.000   -135.099   -80.000   -135.099  crashed     99
+   6  ppo_then_side_tradeoff    0.000   -278.379   -70.000   -278.379  crashed     90
+   6  ppo_noisy_actions         0.000    126.026   -87.000    -87.000  crashed    122
+   7  ppo_deterministic       200.000    267.798   -87.000    113.000  landed     186
+   7  ppo_stochastic          200.000    260.897  -105.000     95.000  landed     198
+   7  left_engine               0.000   -372.604   -62.000   -372.604  crashed     62
+   7  main_engine               0.000   -631.983  -108.000   -631.983  crashed    108
+   7  right_engine              0.000   -308.473   -63.000   -308.473  crashed     63
+   7  random                    0.000     -9.779   -62.000    -62.000  crashed     80
+   7  ppo_then_side_tradeoff    0.000    -81.876   -42.000    -81.876  crashed     65
+   7  ppo_noisy_actions         0.000     50.101   -62.000    -62.000  crashed     87
+   8  ppo_deterministic       200.000    271.821  -174.000     26.000  landed     211
+   8  ppo_stochastic          100.000     58.225  -441.000   -341.000  timeout   1000
+   8  left_engine               0.000   -331.878   -56.000   -331.878  crashed     56
+   8  main_engine               0.000   -472.251  -111.000   -472.251  crashed    111
+   8  right_engine              0.000   -251.312   -55.000   -251.312  crashed     55
+   8  random                    0.000    -90.358   -49.000    -90.358  crashed     67
+   8  ppo_then_side_tradeoff    0.000    -68.696   -43.000    -68.696  crashed     60
+   8  ppo_noisy_actions         0.000     13.553   -60.000    -60.000  crashed     75
+   9  ppo_deterministic       200.000    425.979  -129.000     71.000  landed     250
+   9  ppo_stochastic          200.000    433.446  -134.000     66.000  landed     246
+   9  left_engine               0.000   -563.247   -81.000   -563.247  crashed     81
+   9  main_engine               0.000   -468.784   -72.000   -468.784  crashed     72
+   9  right_engine              0.000   -508.794   -80.000   -508.794  crashed     80
+   9  random                    0.000    -57.130   -86.000    -86.000  crashed    113
+   9  ppo_then_side_tradeoff    0.000    -98.831   -62.000    -98.831  crashed     81
+   9  ppo_noisy_actions         0.000    123.328   -89.000    -89.000  crashed    118
+  10  ppo_deterministic       200.000    326.447   -87.000    113.000  landed     217
+  10  ppo_stochastic          200.000    324.361   -95.000    105.000  landed     206
+  10  left_engine               0.000   -575.326   -83.000   -575.326  crashed     83
+  10  main_engine               0.000  -2.73e+03  -300.000  -2.73e+03  crashed    300
+  10  right_engine              0.000   -557.815   -76.000   -557.815  crashed     76
+  10  random                    0.000    -78.381   -70.000    -78.381  crashed     96
+  10  ppo_then_side_tradeoff    0.000   -189.253   -49.000   -189.253  crashed     77
+  10  ppo_noisy_actions         0.000     36.228   -52.000    -52.000  crashed     96
+  11  ppo_deterministic       200.000    259.566   -95.000    105.000  landed     188
+  11  ppo_stochastic          200.000    241.239   -82.000    118.000  landed     178
+  11  left_engine               0.000   -331.865   -58.000   -331.865  crashed     58
+  11  main_engine               0.000   -643.902  -107.000   -643.902  crashed    107
+  11  right_engine              0.000   -372.918   -56.000   -372.918  crashed     56
+  11  random                    0.000   -137.230   -57.000   -137.230  crashed     76
+  11  ppo_then_side_tradeoff    0.000   -164.497   -33.000   -164.497  crashed     59
+  11  ppo_noisy_actions         0.000      2.525   -58.000    -58.000  crashed     86
+  12  ppo_deterministic       200.000    295.603   -78.000    122.000  landed     176
+  12  ppo_stochastic          200.000    278.015  -101.000     99.000  landed     183
+  12  left_engine               0.000   -402.919   -58.000   -402.919  crashed     58
+  12  main_engine               0.000   -529.951   -79.000   -529.951  crashed     79
+  12  right_engine              0.000   -349.092   -57.000   -349.092  crashed     57
+  12  random                    0.000   -277.472   -68.000   -277.472  crashed     89
+  12  ppo_then_side_tradeoff    0.000      8.383   -82.000    -82.000  crashed    103
+  12  ppo_noisy_actions       200.000    245.396   -94.000    106.000  landed     182
+  13  ppo_deterministic       200.000    336.967  -122.000     78.000  landed     204
+  13  ppo_stochastic          200.000    339.876  -121.000     79.000  landed     213
+  13  left_engine               0.000   -357.503   -59.000   -357.503  crashed     59
+  13  main_engine               0.000   -524.679   -80.000   -524.679  crashed     80
+  13  right_engine              0.000   -338.223   -62.000   -338.223  crashed     62
+  13  random                    0.000    -38.261   -58.000    -58.000  crashed     74
+  13  ppo_then_side_tradeoff    0.000   -360.222   -77.000   -360.222  crashed     97
+  13  ppo_noisy_actions         0.000     30.178   -75.000    -75.000  crashed     91
+  14  ppo_deterministic       200.000    320.504   -93.000    107.000  landed     202
+  14  ppo_stochastic          200.000    322.638   -92.000    108.000  landed     201
+  14  left_engine               0.000   -458.053   -75.000   -458.053  crashed     75
+  14  main_engine               0.000   -831.737  -133.000   -831.737  crashed    133
+  14  right_engine              0.000   -571.576   -76.000   -571.576  crashed     76
+  14  random                    0.000   -188.822   -77.000   -188.822  crashed    104
+  14  ppo_then_side_tradeoff    0.000   -201.192   -50.000   -201.192  crashed     76
+  14  ppo_noisy_actions         0.000     43.814   -62.000    -62.000  crashed     89
+  15  ppo_deterministic       200.000    326.801   -94.000    106.000  landed     228
+  15  ppo_stochastic          200.000    326.386   -86.000    114.000  landed     216
+  15  left_engine               0.000   -649.335   -84.000   -649.335  crashed     84
+  15  main_engine               0.000  -1.71e+03  -201.000  -1.71e+03  crashed    201
+  15  right_engine              0.000   -772.537   -84.000   -772.537  crashed     84
+  15  random                    0.000    -13.706   -84.000    -84.000  crashed    114
+  15  ppo_then_side_tradeoff    0.000   -272.989   -58.000   -272.989  crashed     86
+  15  ppo_noisy_actions         0.000     66.767   -62.000    -62.000  crashed    106
+  16  ppo_deterministic       200.000    308.021  -130.000     70.000  landed     325
+  16  ppo_stochastic          200.000    360.233  -415.000   -215.000  landed     704
+  16  left_engine               0.000   -632.736   -76.000   -632.736  crashed     76
+  16  main_engine               0.000   -537.806   -90.000   -537.806  crashed     90
+  16  right_engine              0.000   -335.922   -77.000   -335.922  crashed     77
+  16  random                    0.000     64.874   -80.000    -80.000  crashed    111
+  16  ppo_then_side_tradeoff    0.000   -159.933   -59.000   -159.933  crashed     79
+  16  ppo_noisy_actions         0.000   -122.794   -79.000   -122.794  crashed    117
+  17  ppo_deterministic       200.000    612.801  -124.000     76.000  landed     253
+  17  ppo_stochastic          200.000    643.748  -130.000     70.000  landed     236
+  17  left_engine               0.000   -642.960   -87.000   -642.960  crashed     87
+  17  main_engine               0.000   -298.436   -81.000   -298.436  crashed     81
+  17  right_engine              0.000   -334.616   -86.000   -334.616  crashed     86
+  17  random                    0.000    -51.776   -69.000    -69.000  crashed     95
+  17  ppo_then_side_tradeoff    0.000    -18.785   -69.000    -69.000  crashed     90
+  17  ppo_noisy_actions         0.000    319.836   -80.000    -80.000  crashed    122
+  18  ppo_deterministic       100.000    302.749  -809.000   -709.000  timeout   1000
+  18  ppo_stochastic          200.000    434.725  -122.000     78.000  landed     242
+  18  left_engine               0.000   -546.754   -82.000   -546.754  crashed     82
+  18  main_engine               0.000   -507.095   -82.000   -507.095  crashed     82
+  18  right_engine              0.000   -815.985   -85.000   -815.985  crashed     85
+  18  random                    0.000   -320.634   -75.000   -320.634  crashed     96
+  18  ppo_then_side_tradeoff    0.000   -241.847   -63.000   -241.847  crashed     83
+  18  ppo_noisy_actions         0.000     99.547   -80.000    -80.000  crashed    117
+  19  ppo_deterministic       200.000    191.204   -93.000    107.000  landed     198
+  19  ppo_stochastic          200.000    191.557   -96.000    104.000  landed     202
+  19  left_engine               0.000   -511.600   -71.000   -511.600  crashed     71
+  19  main_engine               0.000  -1.09e+03  -158.000  -1.09e+03  crashed    158
+  19  right_engine              0.000   -467.879   -71.000   -467.879  crashed     71
+  19  random                    0.000   -194.128   -88.000   -194.128  crashed    109
+  19  ppo_then_side_tradeoff    0.000   -290.856   -45.000   -290.856  crashed     72
+  19  ppo_noisy_actions         0.000    -74.758   -49.000    -74.758  crashed     85
+  20  ppo_deterministic       200.000    311.894   -91.000    109.000  landed     176
+  20  ppo_stochastic          200.000    288.444   -87.000    113.000  landed     172
+  20  left_engine               0.000   -424.748   -52.000   -424.748  crashed     52
+  20  main_engine               0.000  -2.69e+03  -324.000  -2.69e+03  crashed    324
+  20  right_engine              0.000   -172.654   -52.000   -172.654  crashed     52
+  20  random                    0.000    -78.276   -45.000    -78.276  crashed     62
+  20  ppo_then_side_tradeoff    0.000    -84.421   -39.000    -84.421  crashed     57
+  20  ppo_noisy_actions         0.000    102.648   -48.000    -48.000  crashed     65
+  21  ppo_deterministic       200.000    328.936  -128.000     72.000  landed     218
+  21  ppo_stochastic          200.000    328.961  -120.000     80.000  landed     216
+  21  left_engine               0.000   -244.787   -54.000   -244.787  crashed     54
+  21  main_engine               0.000   -516.234   -70.000   -516.234  crashed     70
+  21  right_engine              0.000   -325.045   -51.000   -325.045  crashed     51
+  21  random                    0.000   -214.676   -53.000   -214.676  crashed     68
+  21  ppo_then_side_tradeoff    0.000    -71.746   -38.000    -71.746  crashed     56
+  21  ppo_noisy_actions         0.000     -9.990   -71.000    -71.000  crashed     84
+  22  ppo_deterministic       200.000    198.586   -98.000    102.000  landed     192
+  22  ppo_stochastic          200.000    199.237   -95.000    105.000  landed     185
+  22  left_engine               0.000   -403.870   -59.000   -403.870  crashed     59
+  22  main_engine               0.000  -1.01e+03  -164.000  -1.01e+03  crashed    164
+  22  right_engine              0.000   -410.131   -59.000   -410.131  crashed     59
+  22  random                    0.000   -102.717   -57.000   -102.717  crashed     73
+  22  ppo_then_side_tradeoff    0.000   -390.259   -41.000   -390.259  crashed     70
+  22  ppo_noisy_actions         0.000     -0.339   -53.000    -53.000  crashed     73
+  23  ppo_deterministic       200.000    282.146  -120.000     80.000  landed     229
+  23  ppo_stochastic          200.000    274.736  -124.000     76.000  landed     221
+  23  left_engine               0.000   -423.800   -66.000   -423.800  crashed     66
+  23  main_engine               0.000   -530.773   -77.000   -530.773  crashed     77
+  23  right_engine              0.000   -466.278   -65.000   -466.278  crashed     65
+  23  random                    0.000   -239.518   -56.000   -239.518  crashed     82
+  23  ppo_then_side_tradeoff    0.000   -155.882   -48.000   -155.882  crashed     68
+  23  ppo_noisy_actions         0.000     34.597   -72.000    -72.000  crashed     95
+  24  ppo_deterministic       200.000    307.118   -95.000    105.000  landed     212
+  24  ppo_stochastic          200.000    294.920  -111.000     89.000  landed     218
+  24  left_engine               0.000   -170.923   -50.000   -170.923  crashed     50
+  24  main_engine               0.000   -433.778   -77.000   -433.778  crashed     77
+  24  right_engine              0.000   -228.247   -48.000   -228.247  crashed     48
+  24  random                    0.000     -6.716   -55.000    -55.000  crashed     65
+  24  ppo_then_side_tradeoff    0.000     18.060   -69.000    -69.000  crashed     82
+  24  ppo_noisy_actions         0.000     -9.816   -50.000    -50.000  crashed     61
+  25  ppo_deterministic         0.000   -146.096  -166.000   -166.000  crashed    315
+  25  ppo_stochastic          200.000    277.088   -95.000    105.000  landed     202
+  25  left_engine               0.000   -739.983   -78.000   -739.983  crashed     78
+  25  main_engine               0.000   -841.814  -122.000   -841.814  crashed    122
+  25  right_engine              0.000   -689.444   -77.000   -689.444  crashed     77
+  25  random                    0.000   -318.160   -84.000   -318.160  crashed    121
+  25  ppo_then_side_tradeoff    0.000   -290.350   -55.000   -290.350  crashed     80
+  25  ppo_noisy_actions         0.000    -24.047   -63.000    -63.000  crashed     97
+  26  ppo_deterministic       200.000    447.291  -129.000     71.000  landed     225
+  26  ppo_stochastic          200.000    445.486  -125.000     75.000  landed     215
+  26  left_engine               0.000   -220.300   -66.000   -220.300  crashed     66
+  26  main_engine               0.000   -379.073   -80.000   -379.073  crashed     80
+  26  right_engine              0.000   -490.306   -67.000   -490.306  crashed     67
+  26  random                    0.000   -256.023   -70.000   -256.023  crashed     92
+  26  ppo_then_side_tradeoff    0.000    -70.777   -47.000    -70.777  crashed     67
+  26  ppo_noisy_actions       100.000    277.436  -237.000   -137.000  timeout   1000
+  27  ppo_deterministic       200.000    355.264  -118.000     82.000  landed     232
+  27  ppo_stochastic          200.000    354.892  -122.000     78.000  landed     227
+  27  left_engine               0.000   -646.140   -83.000   -646.140  crashed     83
+  27  main_engine               0.000   -613.966   -85.000   -613.966  crashed     85
+  27  right_engine              0.000   -690.169   -81.000   -690.169  crashed     81
+  27  random                    0.000   -129.557   -76.000   -129.557  crashed    107
+  27  ppo_then_side_tradeoff    0.000   -373.529   -63.000   -373.529  crashed     85
+  27  ppo_noisy_actions         0.000    -88.725   -83.000    -88.725  crashed    134
+  28  ppo_deterministic       200.000    331.565  -109.000     91.000  landed     201
+  28  ppo_stochastic          200.000    318.439  -103.000     97.000  landed     214
+  28  left_engine               0.000   -126.515   -52.000   -126.515  crashed     52
+  28  main_engine               0.000   -421.653  -110.000   -421.653  crashed    110
+  28  right_engine              0.000   -286.982   -51.000   -286.982  crashed     51
+  28  random                    0.000   -116.506   -44.000   -116.506  crashed     58
+  28  ppo_then_side_tradeoff    0.000   -109.963   -43.000   -109.963  crashed     59
+  28  ppo_noisy_actions         0.000     35.136   -54.000    -54.000  crashed     68
+  29  ppo_deterministic       200.000    340.599  -124.000     76.000  landed     280
+  29  ppo_stochastic          200.000    338.297  -126.000     74.000  landed     280
+  29  left_engine               0.000   -659.146   -85.000   -659.146  crashed     85
+  29  main_engine               0.000   -497.241   -76.000   -497.241  crashed     76
+  29  right_engine              0.000   -783.905   -83.000   -783.905  crashed     83
+  29  random                    0.000   -254.622   -72.000   -254.622  crashed    101
+  29  ppo_then_side_tradeoff    0.000   -428.763   -67.000   -428.763  crashed     86
+  29  ppo_noisy_actions         0.000    107.775   -81.000    -81.000  crashed    110
+  30  ppo_deterministic       100.000     82.334  -504.000   -404.000  timeout   1000
+  30  ppo_stochastic          200.000    330.140  -117.000     83.000  landed     209
+  30  left_engine               0.000   -341.591   -62.000   -341.591  crashed     62
+  30  main_engine               0.000   -503.699   -82.000   -503.699  crashed     82
+  30  right_engine              0.000   -393.450   -62.000   -393.450  crashed     62
+  30  random                    0.000    -63.460   -56.000    -63.460  crashed     85
+  30  ppo_then_side_tradeoff    0.000   -142.879   -43.000   -142.879  crashed     64
+  30  ppo_noisy_actions         0.000     26.017   -72.000    -72.000  crashed     93
+  31  ppo_deterministic       200.000    341.870   -94.000    106.000  landed     200
+  31  ppo_stochastic          200.000    344.295   -73.000    127.000  landed     178
+  31  left_engine               0.000   -192.195   -56.000   -192.195  crashed     56
+  31  main_engine               0.000   -560.530  -126.000   -560.530  crashed    126
+  31  right_engine              0.000   -296.976   -53.000   -296.976  crashed     53
+  31  random                    0.000     54.170   -57.000    -57.000  crashed     74
+  31  ppo_then_side_tradeoff    0.000    -10.512   -35.000    -35.000  crashed     58
+  31  ppo_noisy_actions         0.000     56.096   -59.000    -59.000  crashed     77
+  32  ppo_deterministic       200.000    210.020   -99.000    101.000  landed     215
+  32  ppo_stochastic          200.000    196.340  -101.000     99.000  landed     210
+  32  left_engine               0.000   -707.132   -83.000   -707.132  crashed     83
+  32  main_engine               0.000  -1.15e+03  -144.000  -1.15e+03  crashed    144
+  32  right_engine              0.000   -697.937  -100.000   -697.937  crashed    100
+  32  random                    0.000    -54.927  -117.000   -117.000  crashed    149
+  32  ppo_then_side_tradeoff    0.000   -404.981   -56.000   -404.981  crashed     84
+  32  ppo_noisy_actions         0.000    -73.395   -62.000    -73.395  crashed    100
+  33  ppo_deterministic       200.000    308.118  -112.000     88.000  landed     220
+  33  ppo_stochastic          100.000    179.254  -449.000   -349.000  timeout   1000
+  33  left_engine               0.000   -335.581   -56.000   -335.581  crashed     56
+  33  main_engine               0.000   -499.785   -85.000   -499.785  crashed     85
+  33  right_engine              0.000   -359.578   -59.000   -359.578  crashed     59
+  33  random                    0.000    -54.724   -55.000    -55.000  crashed     73
+  33  ppo_then_side_tradeoff    0.000     -9.438   -40.000    -40.000  crashed     59
+  33  ppo_noisy_actions         0.000    -17.627   -58.000    -58.000  crashed     79
+  34  ppo_deterministic       200.000    197.599   -94.000    106.000  landed     231
+  34  ppo_stochastic          200.000    164.233   -91.000    109.000  landed     259
+  34  left_engine               0.000   -297.818   -55.000   -297.818  crashed     55
+  34  main_engine               0.000   -573.656   -99.000   -573.656  crashed     99
+  34  right_engine              0.000   -397.009   -54.000   -397.009  crashed     54
+  34  random                    0.000   -346.914   -52.000   -346.914  crashed     74
+  34  ppo_then_side_tradeoff    0.000   -197.751   -41.000   -197.751  crashed     61
+  34  ppo_noisy_actions         0.000    -35.072   -62.000    -62.000  crashed     80
+  35  ppo_deterministic       200.000    300.975   -99.000    101.000  landed     402
+  35  ppo_stochastic          200.000    299.783  -110.000     90.000  landed     364
+  35  left_engine               0.000   -356.979   -59.000   -356.979  crashed     59
+  35  main_engine               0.000   -471.320   -73.000   -471.320  crashed     73
+  35  right_engine              0.000   -312.240   -55.000   -312.240  crashed     55
+  35  random                    0.000   -304.506   -59.000   -304.506  crashed     81
+  35  ppo_then_side_tradeoff    0.000   -402.112   -71.000   -402.112  crashed     92
+  35  ppo_noisy_actions         0.000    -42.241   -59.000    -59.000  crashed     74
+  36  ppo_deterministic       200.000    335.240   -99.000    101.000  landed     205
+  36  ppo_stochastic          200.000    332.725  -102.000     98.000  landed     213
+  36  left_engine               0.000   -625.110   -83.000   -625.110  crashed     83
+  36  main_engine               0.000   -897.423  -124.000   -897.423  crashed    124
+  36  right_engine              0.000   -898.268   -86.000   -898.268  crashed     86
+  36  random                    0.000   -292.828   -90.000   -292.828  crashed    120
+  36  ppo_then_side_tradeoff    0.000   -287.659   -59.000   -287.659  crashed     85
+  36  ppo_noisy_actions         0.000     69.915   -62.000    -62.000  crashed    102
+  37  ppo_deterministic       200.000    339.693  -149.000     51.000  landed     196
+  37  ppo_stochastic            0.000    -53.282  -164.000   -164.000  crashed    265
+  37  left_engine               0.000   -372.191   -55.000   -372.191  crashed     55
+  37  main_engine               0.000   -500.430  -139.000   -500.430  crashed    139
+  37  right_engine              0.000   -130.431   -53.000   -130.431  crashed     53
+  37  random                    0.000     77.571   -69.000    -69.000  crashed     92
+  37  ppo_then_side_tradeoff    0.000    -42.693   -41.000    -42.693  crashed     59
+  37  ppo_noisy_actions         0.000    107.274   -59.000    -59.000  crashed     76
+  38  ppo_deterministic       200.000    244.718   -97.000    103.000  landed     206
+  38  ppo_stochastic          200.000    262.081  -105.000     95.000  landed     338
+  38  left_engine               0.000   -497.158   -72.000   -497.158  crashed     72
+  38  main_engine               0.000   -644.461  -107.000   -644.461  crashed    107
+  38  right_engine              0.000   -684.321   -81.000   -684.321  crashed     81
+  38  random                    0.000   -318.730   -82.000   -318.730  crashed    112
+  38  ppo_then_side_tradeoff    0.000   -225.828   -49.000   -225.828  crashed     73
+  38  ppo_noisy_actions         0.000    -26.005   -65.000    -65.000  crashed     92
+  39  ppo_deterministic       200.000    357.722   -97.000    103.000  landed     245
+  39  ppo_stochastic          200.000    357.394   -93.000    107.000  landed     232
+  39  left_engine               0.000   -383.378   -58.000   -383.378  crashed     58
+  39  main_engine               0.000   -422.064   -96.000   -422.064  crashed     96
+  39  right_engine              0.000   -160.570   -57.000   -160.570  crashed     57
+  39  random                    0.000      6.173   -55.000    -55.000  crashed     72
+  39  ppo_then_side_tradeoff    0.000    -54.259   -42.000    -54.259  crashed     61
+  39  ppo_noisy_actions         0.000     89.297   -53.000    -53.000  crashed     71
+  40  ppo_deterministic       200.000    221.259   -90.000    110.000  landed     183
+  40  ppo_stochastic          200.000    233.223   -89.000    111.000  landed     177
+  40  left_engine               0.000   -292.904   -51.000   -292.904  crashed     51
+  40  main_engine               0.000   -585.891  -118.000   -585.891  crashed    118
+  40  right_engine              0.000   -373.549   -50.000   -373.549  crashed     50
+  40  random                    0.000     23.869   -49.000    -49.000  crashed     66
+  40  ppo_then_side_tradeoff    0.000   -115.405   -38.000   -115.405  crashed     57
+  40  ppo_noisy_actions         0.000    -29.852   -54.000    -54.000  crashed     70
+
+==========================
+Per candidate (seeds 1-40)
+==========================
+candidate               landed  crashed  timeout  mean dr  mean dn_Saf  mean dn_Fuel  margin min  median    max     
+----------------------  ------  -------  -------  -------  -----------  ------------  ----------  --------  --------
+ppo_deterministic        92.5%     2.5%     5.0%  190.000      287.228      -135.425    -709.000   101.000   122.000
+ppo_stochastic           92.5%     2.5%     5.0%  190.000      288.053      -130.850    -349.000    97.500   127.000
+left_engine               0.0%   100.0%     0.0%    0.000     -479.698       -68.450    -900.339  -441.400  -126.515
+main_engine               0.0%   100.0%     0.0%    0.000     -889.527      -126.750   -3.47e+03  -567.093  -298.436
+right_engine              0.0%   100.0%     0.0%    0.000     -472.662       -68.575    -898.268  -430.852  -130.431
+random                    0.0%   100.0%     0.0%    0.000     -129.347       -69.250    -346.914  -116.343   -49.000
+ppo_then_side_tradeoff    0.0%   100.0%     0.0%    0.000     -193.841       -52.075    -428.763  -193.502   -35.000
+ppo_noisy_actions         2.5%    95.0%     2.5%    7.500       36.053       -68.925    -137.000   -62.000   106.000
+
+===========================================================
+Margin distribution and share inside the eps band [-0.5, 0]
+===========================================================
+set       pairs  min        median    max      in band  share
+--------  -----  ---------  --------  -------  -------  -----
+default     240  -3.47e+03  -282.227  127.000  0/240     0.0%
+extended    320  -3.47e+03  -164.248  127.000  0/320     0.0%
+smallest |margin| over all extended pairs: 26.000; pairs with |margin| < 5: 0; < 50: 6
+
+=========================================
+Admission table, raw units -- default set
+=========================================
+candidate          eps=0   eps=0.05  eps=0.1  eps=0.2  eps=0.3  eps=0.5  flips 0->0.5
+-----------------  ------  --------  -------  -------  -------  -------  ------------
+ppo_deterministic  37/40   37/40     37/40    37/40    37/40    37/40               0
+ppo_stochastic     36/40   36/40     36/40    36/40    36/40    36/40               0
+left_engine        0/40    0/40      0/40     0/40     0/40     0/40                0
+main_engine        0/40    0/40      0/40     0/40     0/40     0/40                0
+right_engine       0/40    0/40      0/40     0/40     0/40     0/40                0
+random             0/40    0/40      0/40     0/40     0/40     0/40                0
+ALL                73/240  73/240    73/240   73/240   73/240   73/240              0
+pairs that change admission between eps=0 and eps=0.5: 0/240 (0.0%)
+
+==========================================
+Admission table, raw units -- extended set
+==========================================
+candidate               eps=0   eps=0.05  eps=0.1  eps=0.2  eps=0.3  eps=0.5  flips 0->0.5
+----------------------  ------  --------  -------  -------  -------  -------  ------------
+ppo_deterministic       37/40   37/40     37/40    37/40    37/40    37/40               0
+ppo_stochastic          36/40   36/40     36/40    36/40    36/40    36/40               0
+left_engine             0/40    0/40      0/40     0/40     0/40     0/40                0
+main_engine             0/40    0/40      0/40     0/40     0/40     0/40                0
+right_engine            0/40    0/40      0/40     0/40     0/40     0/40                0
+random                  0/40    0/40      0/40     0/40     0/40     0/40                0
+ppo_then_side_tradeoff  0/40    0/40      0/40     0/40     0/40     0/40                0
+ppo_noisy_actions       1/40    1/40      1/40     1/40     1/40     1/40                0
+ALL                     74/320  74/320    74/320   74/320   74/320   74/320              0
+pairs that change admission between eps=0 and eps=0.5: 0/320 (0.0%)
