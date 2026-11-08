@@ -1,0 +1,1169 @@
+﻿
+======================================================================================
+E4 run 1a -- scripted epsilon, same start every step (seed 8), fresh pipeline per step
+======================================================================================
+
+===============================
+Run 1a -- fix OFF (raw epsilon)
+===============================
+
+step 0  seed 8  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.500      26.500  yes     
+ppo_stochastic     timeout  -341.000              0.500    -340.500  no      
+left_engine        crashed  -331.878              0.500    -331.378  no      
+main_engine        crashed  -472.251              0.500    -471.751  no      
+right_engine       crashed  -251.312              0.500    -250.812  no      
+random             crashed   -90.358              0.500     -89.858  no      
+ppo_waste_side_15  landed    -43.000              0.500     -42.500  no      
+ppo_waste_main_15  timeout  -373.000              0.500    -372.500  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 1  seed 8  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.300      26.300  yes     
+ppo_stochastic     timeout  -341.000              0.300    -340.700  no      
+left_engine        crashed  -331.878              0.300    -331.578  no      
+main_engine        crashed  -472.251              0.300    -471.951  no      
+right_engine       crashed  -251.312              0.300    -251.012  no      
+random             crashed   -90.358              0.300     -90.058  no      
+ppo_waste_side_15  landed    -43.000              0.300     -42.700  no      
+ppo_waste_main_15  timeout  -373.000              0.300    -372.700  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 2  seed 8  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.100      26.100  yes     
+ppo_stochastic     timeout  -341.000              0.100    -340.900  no      
+left_engine        crashed  -331.878              0.100    -331.778  no      
+main_engine        crashed  -472.251              0.100    -472.151  no      
+right_engine       crashed  -251.312              0.100    -251.212  no      
+random             crashed   -90.358              0.100     -90.258  no      
+ppo_waste_side_15  landed    -43.000              0.100     -42.900  no      
+ppo_waste_main_15  timeout  -373.000              0.100    -372.900  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 3  seed 8  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.000      26.000  yes     
+ppo_stochastic     timeout  -341.000              0.000    -341.000  no      
+left_engine        crashed  -331.878              0.000    -331.878  no      
+main_engine        crashed  -472.251              0.000    -472.251  no      
+right_engine       crashed  -251.312              0.000    -251.312  no      
+random             crashed   -90.358              0.000     -90.358  no      
+ppo_waste_side_15  landed    -43.000              0.000     -43.000  no      
+ppo_waste_main_15  timeout  -373.000              0.000    -373.000  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted           selected           flown 
+----  ----  -----  ----  -----------------  -----------------  ------
+   0     8  0.500     1  ppo_deterministic  ppo_deterministic  landed
+   1     8  0.300     1  ppo_deterministic  ppo_deterministic  landed
+   2     8  0.100     1  ppo_deterministic  ppo_deterministic  landed
+   3     8  0.000     1  ppo_deterministic  ppo_deterministic  landed
+
+======================================
+Run 1a -- fix ON (guarded scale 300.0)
+======================================
+
+step 0  seed 8  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000            150.000     176.000  yes     
+ppo_stochastic     timeout  -341.000            150.000    -191.000  no      
+left_engine        crashed  -331.878              0.500    -331.378  no      
+main_engine        crashed  -472.251              0.500    -471.751  no      
+right_engine       crashed  -251.312              0.500    -250.812  no      
+random             crashed   -90.358              0.500     -89.858  no      
+ppo_waste_side_15  landed    -43.000            150.000     107.000  yes     
+ppo_waste_main_15  timeout  -373.000            150.000    -223.000  no      
+admitted: ['ppo_deterministic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 1  seed 8  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000             90.000     116.000  yes     
+ppo_stochastic     timeout  -341.000             90.000    -251.000  no      
+left_engine        crashed  -331.878              0.300    -331.578  no      
+main_engine        crashed  -472.251              0.300    -471.951  no      
+right_engine       crashed  -251.312              0.300    -251.012  no      
+random             crashed   -90.358              0.300     -90.058  no      
+ppo_waste_side_15  landed    -43.000             90.000      47.000  yes     
+ppo_waste_main_15  timeout  -373.000             90.000    -283.000  no      
+admitted: ['ppo_deterministic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 2  seed 8  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000             30.000      56.000  yes     
+ppo_stochastic     timeout  -341.000             30.000    -311.000  no      
+left_engine        crashed  -331.878              0.100    -331.778  no      
+main_engine        crashed  -472.251              0.100    -472.151  no      
+right_engine       crashed  -251.312              0.100    -251.212  no      
+random             crashed   -90.358              0.100     -90.258  no      
+ppo_waste_side_15  landed    -43.000             30.000     -13.000  no      
+ppo_waste_main_15  timeout  -373.000             30.000    -343.000  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 3  seed 8  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.000      26.000  yes     
+ppo_stochastic     timeout  -341.000              0.000    -341.000  no      
+left_engine        crashed  -331.878              0.000    -331.878  no      
+main_engine        crashed  -472.251              0.000    -472.251  no      
+right_engine       crashed  -251.312              0.000    -251.312  no      
+random             crashed   -90.358              0.000     -90.358  no      
+ppo_waste_side_15  landed    -43.000              0.000     -43.000  no      
+ppo_waste_main_15  timeout  -373.000              0.000    -373.000  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted                              selected           flown 
+----  ----  -----  ----  ------------------------------------  -----------------  ------
+   0     8  0.500     2  ppo_deterministic, ppo_waste_side_15  ppo_deterministic  landed
+   1     8  0.300     2  ppo_deterministic, ppo_waste_side_15  ppo_deterministic  landed
+   2     8  0.100     1  ppo_deterministic                     ppo_deterministic  landed
+   3     8  0.000     1  ppo_deterministic                     ppo_deterministic  landed
+
+=============================================================================================
+E4 run 1b -- scripted epsilon cycling 0.5/0.3/0.1/0.0, a new held-out seed every step (21-40)
+=============================================================================================
+
+===============================
+Run 1b -- fix OFF (raw epsilon)
+===============================
+
+step 0  seed 21  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     72.000              0.500      72.500  yes     
+ppo_stochastic     landed     80.000              0.500      80.500  yes     
+left_engine        crashed  -244.787              0.500    -244.287  no      
+main_engine        crashed  -516.234              0.500    -515.734  no      
+right_engine       crashed  -325.045              0.500    -324.545  no      
+random             crashed  -214.676              0.500    -214.176  no      
+ppo_waste_side_15  timeout  -271.000              0.500    -270.500  no      
+ppo_waste_main_15  timeout  -177.000              0.500    -176.500  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 1  seed 22  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin     tolerance eps_env  margin+tol  admitted
+-----------------  -------  ---------  -----------------  ----------  --------
+ppo_deterministic  landed     102.000              0.300     102.300  yes     
+ppo_stochastic     landed     105.000              0.300     105.300  yes     
+left_engine        crashed   -403.870              0.300    -403.570  no      
+main_engine        crashed  -1.01e+03              0.300   -1.01e+03  no      
+right_engine       crashed   -410.131              0.300    -409.831  no      
+random             crashed   -102.717              0.300    -102.417  no      
+ppo_waste_side_15  landed      77.000              0.300      77.300  yes     
+ppo_waste_main_15  landed      13.000              0.300      13.300  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 2  seed 23  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     80.000              0.100      80.100  yes     
+ppo_stochastic     landed     76.000              0.100      76.100  yes     
+left_engine        crashed  -423.800              0.100    -423.700  no      
+main_engine        crashed  -530.773              0.100    -530.673  no      
+right_engine       crashed  -466.278              0.100    -466.178  no      
+random             crashed  -239.518              0.100    -239.418  no      
+ppo_waste_side_15  landed     18.000              0.100      18.100  yes     
+ppo_waste_main_15  landed      1.000              0.100       1.100  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 3  seed 24  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    105.000              0.000     105.000  yes     
+ppo_stochastic     landed     89.000              0.000      89.000  yes     
+left_engine        crashed  -170.923              0.000    -170.923  no      
+main_engine        crashed  -433.778              0.000    -433.778  no      
+right_engine       crashed  -228.247              0.000    -228.247  no      
+random             crashed   -55.000              0.000     -55.000  no      
+ppo_waste_side_15  timeout  -236.000              0.000    -236.000  no      
+ppo_waste_main_15  timeout  -149.000              0.000    -149.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 4  seed 25  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  crashed  -166.000              0.500    -165.500  no      
+ppo_stochastic     landed    105.000              0.500     105.500  yes     
+left_engine        crashed  -739.983              0.500    -739.483  no      
+main_engine        crashed  -841.814              0.500    -841.314  no      
+right_engine       crashed  -689.444              0.500    -688.944  no      
+random             crashed  -318.160              0.500    -317.660  no      
+ppo_waste_side_15  crashed  -202.000              0.500    -201.500  no      
+ppo_waste_main_15  crashed  -198.000              0.500    -197.500  no      
+admitted: ['ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 5  seed 26  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     71.000              0.300      71.300  yes     
+ppo_stochastic     landed     75.000              0.300      75.300  yes     
+left_engine        crashed  -220.300              0.300    -220.000  no      
+main_engine        crashed  -379.073              0.300    -378.773  no      
+right_engine       crashed  -490.306              0.300    -490.006  no      
+random             crashed  -256.023              0.300    -255.723  no      
+ppo_waste_side_15  landed   -132.000              0.300    -131.700  no      
+ppo_waste_main_15  timeout  -176.000              0.300    -175.700  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 6  seed 27  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     82.000              0.100      82.100  yes     
+ppo_stochastic     landed     78.000              0.100      78.100  yes     
+left_engine        crashed  -646.140              0.100    -646.040  no      
+main_engine        crashed  -613.966              0.100    -613.866  no      
+right_engine       crashed  -690.169              0.100    -690.069  no      
+random             crashed  -129.557              0.100    -129.457  no      
+ppo_waste_side_15  landed    -53.000              0.100     -52.900  no      
+ppo_waste_main_15  landed     18.000              0.100      18.100  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 7  seed 28  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     91.000              0.000      91.000  yes     
+ppo_stochastic     landed     97.000              0.000      97.000  yes     
+left_engine        crashed  -126.515              0.000    -126.515  no      
+main_engine        crashed  -421.653              0.000    -421.653  no      
+right_engine       crashed  -286.982              0.000    -286.982  no      
+random             crashed  -116.506              0.000    -116.506  no      
+ppo_waste_side_15  landed     19.000              0.000      19.000  yes     
+ppo_waste_main_15  landed     -3.000              0.000      -3.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 8  seed 29  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     76.000              0.500      76.500  yes     
+ppo_stochastic     landed     74.000              0.500      74.500  yes     
+left_engine        crashed  -659.146              0.500    -658.646  no      
+main_engine        crashed  -497.241              0.500    -496.741  no      
+right_engine       crashed  -783.905              0.500    -783.405  no      
+random             crashed  -254.622              0.500    -254.122  no      
+ppo_waste_side_15  timeout  -253.000              0.500    -252.500  no      
+ppo_waste_main_15  timeout  -276.000              0.500    -275.500  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 9  seed 30  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  timeout  -404.000              0.300    -403.700  no      
+ppo_stochastic     landed     83.000              0.300      83.300  yes     
+left_engine        crashed  -341.591              0.300    -341.291  no      
+main_engine        crashed  -503.699              0.300    -503.399  no      
+right_engine       crashed  -393.450              0.300    -393.150  no      
+random             crashed   -63.460              0.300     -63.160  no      
+ppo_waste_side_15  landed   -318.000              0.300    -317.700  no      
+ppo_waste_main_15  landed      4.000              0.300       4.300  yes     
+admitted: ['ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 10  seed 31  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    106.000              0.100     106.100  yes     
+ppo_stochastic     landed    127.000              0.100     127.100  yes     
+left_engine        crashed  -192.195              0.100    -192.095  no      
+main_engine        crashed  -560.530              0.100    -560.430  no      
+right_engine       crashed  -296.976              0.100    -296.876  no      
+random             crashed   -57.000              0.100     -56.900  no      
+ppo_waste_side_15  landed      8.000              0.100       8.100  yes     
+ppo_waste_main_15  timeout  -147.000              0.100    -146.900  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 11  seed 32  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin     tolerance eps_env  margin+tol  admitted
+-----------------  -------  ---------  -----------------  ----------  --------
+ppo_deterministic  landed     101.000              0.000     101.000  yes     
+ppo_stochastic     landed      99.000              0.000      99.000  yes     
+left_engine        crashed   -707.132              0.000    -707.132  no      
+main_engine        crashed  -1.15e+03              0.000   -1.15e+03  no      
+right_engine       crashed   -697.937              0.000    -697.937  no      
+random             crashed   -117.000              0.000    -117.000  no      
+ppo_waste_side_15  landed     -38.000              0.000     -38.000  no      
+ppo_waste_main_15  landed      32.000              0.000      32.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 12  seed 33  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     88.000              0.500      88.500  yes     
+ppo_stochastic     timeout  -349.000              0.500    -348.500  no      
+left_engine        crashed  -335.581              0.500    -335.081  no      
+main_engine        crashed  -499.785              0.500    -499.285  no      
+right_engine       crashed  -359.578              0.500    -359.078  no      
+random             crashed   -55.000              0.500     -54.500  no      
+ppo_waste_side_15  crashed  -180.000              0.500    -179.500  no      
+ppo_waste_main_15  landed    -25.000              0.500     -24.500  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 13  seed 34  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    106.000              0.300     106.300  yes     
+ppo_stochastic     landed    109.000              0.300     109.300  yes     
+left_engine        crashed  -297.818              0.300    -297.518  no      
+main_engine        crashed  -573.656              0.300    -573.356  no      
+right_engine       crashed  -397.009              0.300    -396.709  no      
+random             crashed  -346.914              0.300    -346.614  no      
+ppo_waste_side_15  landed    -22.000              0.300     -21.700  no      
+ppo_waste_main_15  landed    -88.000              0.300     -87.700  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 14  seed 35  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    101.000              0.100     101.100  yes     
+ppo_stochastic     landed     90.000              0.100      90.100  yes     
+left_engine        crashed  -356.979              0.100    -356.879  no      
+main_engine        crashed  -471.320              0.100    -471.220  no      
+right_engine       crashed  -312.240              0.100    -312.140  no      
+random             crashed  -304.506              0.100    -304.406  no      
+ppo_waste_side_15  landed   -111.000              0.100    -110.900  no      
+ppo_waste_main_15  timeout  -140.000              0.100    -139.900  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 15  seed 36  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    101.000              0.000     101.000  yes     
+ppo_stochastic     landed     98.000              0.000      98.000  yes     
+left_engine        crashed  -625.110              0.000    -625.110  no      
+main_engine        crashed  -897.423              0.000    -897.423  no      
+right_engine       crashed  -898.268              0.000    -898.268  no      
+random             crashed  -292.828              0.000    -292.828  no      
+ppo_waste_side_15  timeout  -233.000              0.000    -233.000  no      
+ppo_waste_main_15  timeout  -148.000              0.000    -148.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 16  seed 37  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     51.000              0.500      51.500  yes     
+ppo_stochastic     crashed  -164.000              0.500    -163.500  no      
+left_engine        crashed  -372.191              0.500    -371.691  no      
+main_engine        crashed  -500.430              0.500    -499.930  no      
+right_engine       crashed  -130.431              0.500    -129.931  no      
+random             crashed   -69.000              0.500     -68.500  no      
+ppo_waste_side_15  crashed  -169.000              0.500    -168.500  no      
+ppo_waste_main_15  crashed  -160.000              0.500    -159.500  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 17  seed 38  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    103.000              0.300     103.300  yes     
+ppo_stochastic     landed     95.000              0.300      95.300  yes     
+left_engine        crashed  -497.158              0.300    -496.858  no      
+main_engine        crashed  -644.461              0.300    -644.161  no      
+right_engine       crashed  -684.321              0.300    -684.021  no      
+random             crashed  -318.730              0.300    -318.430  no      
+ppo_waste_side_15  timeout  -255.000              0.300    -254.700  no      
+ppo_waste_main_15  timeout  -160.000              0.300    -159.700  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 18  seed 39  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    103.000              0.100     103.100  yes     
+ppo_stochastic     landed    107.000              0.100     107.100  yes     
+left_engine        crashed  -383.378              0.100    -383.278  no      
+main_engine        crashed  -422.064              0.100    -421.964  no      
+right_engine       crashed  -160.570              0.100    -160.470  no      
+random             crashed   -55.000              0.100     -54.900  no      
+ppo_waste_side_15  landed   -130.000              0.100    -129.900  no      
+ppo_waste_main_15  landed    -20.000              0.100     -19.900  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 19  seed 40  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    110.000              0.000     110.000  yes     
+ppo_stochastic     landed    111.000              0.000     111.000  yes     
+left_engine        crashed  -292.904              0.000    -292.904  no      
+main_engine        crashed  -585.891              0.000    -585.891  no      
+right_engine       crashed  -373.549              0.000    -373.549  no      
+random             crashed   -49.000              0.000     -49.000  no      
+ppo_waste_side_15  landed     29.000              0.000      29.000  yes     
+ppo_waste_main_15  landed     69.000              0.000      69.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted                                                                 selected           flown 
+----  ----  -----  ----  -----------------------------------------------------------------------  -----------------  ------
+   0    21  0.500     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+   1    22  0.300     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_stochastic     landed
+   2    23  0.100     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_deterministic  landed
+   3    24  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   4    25  0.500     1  ppo_stochastic                                                           ppo_stochastic     landed
+   5    26  0.300     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+   6    27  0.100     3  ppo_deterministic, ppo_stochastic, ppo_waste_main_15                     ppo_deterministic  landed
+   7    28  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_side_15                     ppo_deterministic  landed
+   8    29  0.500     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   9    30  0.300     2  ppo_stochastic, ppo_waste_main_15                                        ppo_stochastic     landed
+  10    31  0.100     3  ppo_deterministic, ppo_stochastic, ppo_waste_side_15                     ppo_stochastic     landed
+  11    32  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_main_15                     ppo_deterministic  landed
+  12    33  0.500     1  ppo_deterministic                                                        ppo_deterministic  landed
+  13    34  0.300     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+  14    35  0.100     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+  15    36  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+  16    37  0.500     1  ppo_deterministic                                                        ppo_deterministic  landed
+  17    38  0.300     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+  18    39  0.100     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+  19    40  0.000     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_stochastic     landed
+
+======================================
+Run 1b -- fix ON (guarded scale 300.0)
+======================================
+
+step 0  seed 21  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     72.000            150.000     222.000  yes     
+ppo_stochastic     landed     80.000            150.000     230.000  yes     
+left_engine        crashed  -244.787              0.500    -244.287  no      
+main_engine        crashed  -516.234              0.500    -515.734  no      
+right_engine       crashed  -325.045              0.500    -324.545  no      
+random             crashed  -214.676              0.500    -214.176  no      
+ppo_waste_side_15  timeout  -271.000            150.000    -121.000  no      
+ppo_waste_main_15  timeout  -177.000            150.000     -27.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 1  seed 22  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin     tolerance eps_env  margin+tol  admitted
+-----------------  -------  ---------  -----------------  ----------  --------
+ppo_deterministic  landed     102.000             90.000     192.000  yes     
+ppo_stochastic     landed     105.000             90.000     195.000  yes     
+left_engine        crashed   -403.870              0.300    -403.570  no      
+main_engine        crashed  -1.01e+03              0.300   -1.01e+03  no      
+right_engine       crashed   -410.131              0.300    -409.831  no      
+random             crashed   -102.717              0.300    -102.417  no      
+ppo_waste_side_15  landed      77.000             90.000     167.000  yes     
+ppo_waste_main_15  landed      13.000             90.000     103.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 2  seed 23  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     80.000             30.000     110.000  yes     
+ppo_stochastic     landed     76.000             30.000     106.000  yes     
+left_engine        crashed  -423.800              0.100    -423.700  no      
+main_engine        crashed  -530.773              0.100    -530.673  no      
+right_engine       crashed  -466.278              0.100    -466.178  no      
+random             crashed  -239.518              0.100    -239.418  no      
+ppo_waste_side_15  landed     18.000             30.000      48.000  yes     
+ppo_waste_main_15  landed      1.000             30.000      31.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 3  seed 24  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    105.000              0.000     105.000  yes     
+ppo_stochastic     landed     89.000              0.000      89.000  yes     
+left_engine        crashed  -170.923              0.000    -170.923  no      
+main_engine        crashed  -433.778              0.000    -433.778  no      
+right_engine       crashed  -228.247              0.000    -228.247  no      
+random             crashed   -55.000              0.000     -55.000  no      
+ppo_waste_side_15  timeout  -236.000              0.000    -236.000  no      
+ppo_waste_main_15  timeout  -149.000              0.000    -149.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 4  seed 25  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  crashed  -166.000              0.500    -165.500  no      
+ppo_stochastic     landed    105.000            150.000     255.000  yes     
+left_engine        crashed  -739.983              0.500    -739.483  no      
+main_engine        crashed  -841.814              0.500    -841.314  no      
+right_engine       crashed  -689.444              0.500    -688.944  no      
+random             crashed  -318.160              0.500    -317.660  no      
+ppo_waste_side_15  crashed  -202.000              0.500    -201.500  no      
+ppo_waste_main_15  crashed  -198.000              0.500    -197.500  no      
+admitted: ['ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 5  seed 26  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     71.000             90.000     161.000  yes     
+ppo_stochastic     landed     75.000             90.000     165.000  yes     
+left_engine        crashed  -220.300              0.300    -220.000  no      
+main_engine        crashed  -379.073              0.300    -378.773  no      
+right_engine       crashed  -490.306              0.300    -490.006  no      
+random             crashed  -256.023              0.300    -255.723  no      
+ppo_waste_side_15  landed   -132.000             90.000     -42.000  no      
+ppo_waste_main_15  timeout  -176.000             90.000     -86.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 6  seed 27  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     82.000             30.000     112.000  yes     
+ppo_stochastic     landed     78.000             30.000     108.000  yes     
+left_engine        crashed  -646.140              0.100    -646.040  no      
+main_engine        crashed  -613.966              0.100    -613.866  no      
+right_engine       crashed  -690.169              0.100    -690.069  no      
+random             crashed  -129.557              0.100    -129.457  no      
+ppo_waste_side_15  landed    -53.000             30.000     -23.000  no      
+ppo_waste_main_15  landed     18.000             30.000      48.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 7  seed 28  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     91.000              0.000      91.000  yes     
+ppo_stochastic     landed     97.000              0.000      97.000  yes     
+left_engine        crashed  -126.515              0.000    -126.515  no      
+main_engine        crashed  -421.653              0.000    -421.653  no      
+right_engine       crashed  -286.982              0.000    -286.982  no      
+random             crashed  -116.506              0.000    -116.506  no      
+ppo_waste_side_15  landed     19.000              0.000      19.000  yes     
+ppo_waste_main_15  landed     -3.000              0.000      -3.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 8  seed 29  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     76.000            150.000     226.000  yes     
+ppo_stochastic     landed     74.000            150.000     224.000  yes     
+left_engine        crashed  -659.146              0.500    -658.646  no      
+main_engine        crashed  -497.241              0.500    -496.741  no      
+right_engine       crashed  -783.905              0.500    -783.405  no      
+random             crashed  -254.622              0.500    -254.122  no      
+ppo_waste_side_15  timeout  -253.000            150.000    -103.000  no      
+ppo_waste_main_15  timeout  -276.000            150.000    -126.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 9  seed 30  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  timeout  -404.000             90.000    -314.000  no      
+ppo_stochastic     landed     83.000             90.000     173.000  yes     
+left_engine        crashed  -341.591              0.300    -341.291  no      
+main_engine        crashed  -503.699              0.300    -503.399  no      
+right_engine       crashed  -393.450              0.300    -393.150  no      
+random             crashed   -63.460              0.300     -63.160  no      
+ppo_waste_side_15  landed   -318.000             90.000    -228.000  no      
+ppo_waste_main_15  landed      4.000             90.000      94.000  yes     
+admitted: ['ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 10  seed 31  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    106.000             30.000     136.000  yes     
+ppo_stochastic     landed    127.000             30.000     157.000  yes     
+left_engine        crashed  -192.195              0.100    -192.095  no      
+main_engine        crashed  -560.530              0.100    -560.430  no      
+right_engine       crashed  -296.976              0.100    -296.876  no      
+random             crashed   -57.000              0.100     -56.900  no      
+ppo_waste_side_15  landed      8.000             30.000      38.000  yes     
+ppo_waste_main_15  timeout  -147.000             30.000    -117.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 11  seed 32  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin     tolerance eps_env  margin+tol  admitted
+-----------------  -------  ---------  -----------------  ----------  --------
+ppo_deterministic  landed     101.000              0.000     101.000  yes     
+ppo_stochastic     landed      99.000              0.000      99.000  yes     
+left_engine        crashed   -707.132              0.000    -707.132  no      
+main_engine        crashed  -1.15e+03              0.000   -1.15e+03  no      
+right_engine       crashed   -697.937              0.000    -697.937  no      
+random             crashed   -117.000              0.000    -117.000  no      
+ppo_waste_side_15  landed     -38.000              0.000     -38.000  no      
+ppo_waste_main_15  landed      32.000              0.000      32.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 12  seed 33  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     88.000            150.000     238.000  yes     
+ppo_stochastic     timeout  -349.000            150.000    -199.000  no      
+left_engine        crashed  -335.581              0.500    -335.081  no      
+main_engine        crashed  -499.785              0.500    -499.285  no      
+right_engine       crashed  -359.578              0.500    -359.078  no      
+random             crashed   -55.000              0.500     -54.500  no      
+ppo_waste_side_15  crashed  -180.000              0.500    -179.500  no      
+ppo_waste_main_15  landed    -25.000            150.000     125.000  yes     
+admitted: ['ppo_deterministic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 13  seed 34  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    106.000             90.000     196.000  yes     
+ppo_stochastic     landed    109.000             90.000     199.000  yes     
+left_engine        crashed  -297.818              0.300    -297.518  no      
+main_engine        crashed  -573.656              0.300    -573.356  no      
+right_engine       crashed  -397.009              0.300    -396.709  no      
+random             crashed  -346.914              0.300    -346.614  no      
+ppo_waste_side_15  landed    -22.000             90.000      68.000  yes     
+ppo_waste_main_15  landed    -88.000             90.000       2.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 14  seed 35  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    101.000             30.000     131.000  yes     
+ppo_stochastic     landed     90.000             30.000     120.000  yes     
+left_engine        crashed  -356.979              0.100    -356.879  no      
+main_engine        crashed  -471.320              0.100    -471.220  no      
+right_engine       crashed  -312.240              0.100    -312.140  no      
+random             crashed  -304.506              0.100    -304.406  no      
+ppo_waste_side_15  landed   -111.000             30.000     -81.000  no      
+ppo_waste_main_15  timeout  -140.000             30.000    -110.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 15  seed 36  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    101.000              0.000     101.000  yes     
+ppo_stochastic     landed     98.000              0.000      98.000  yes     
+left_engine        crashed  -625.110              0.000    -625.110  no      
+main_engine        crashed  -897.423              0.000    -897.423  no      
+right_engine       crashed  -898.268              0.000    -898.268  no      
+random             crashed  -292.828              0.000    -292.828  no      
+ppo_waste_side_15  timeout  -233.000              0.000    -233.000  no      
+ppo_waste_main_15  timeout  -148.000              0.000    -148.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 16  seed 37  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     51.000            150.000     201.000  yes     
+ppo_stochastic     crashed  -164.000              0.500    -163.500  no      
+left_engine        crashed  -372.191              0.500    -371.691  no      
+main_engine        crashed  -500.430              0.500    -499.930  no      
+right_engine       crashed  -130.431              0.500    -129.931  no      
+random             crashed   -69.000              0.500     -68.500  no      
+ppo_waste_side_15  crashed  -169.000              0.500    -168.500  no      
+ppo_waste_main_15  crashed  -160.000              0.500    -159.500  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 17  seed 38  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    103.000             90.000     193.000  yes     
+ppo_stochastic     landed     95.000             90.000     185.000  yes     
+left_engine        crashed  -497.158              0.300    -496.858  no      
+main_engine        crashed  -644.461              0.300    -644.161  no      
+right_engine       crashed  -684.321              0.300    -684.021  no      
+random             crashed  -318.730              0.300    -318.430  no      
+ppo_waste_side_15  timeout  -255.000             90.000    -165.000  no      
+ppo_waste_main_15  timeout  -160.000             90.000     -70.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 18  seed 39  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    103.000             30.000     133.000  yes     
+ppo_stochastic     landed    107.000             30.000     137.000  yes     
+left_engine        crashed  -383.378              0.100    -383.278  no      
+main_engine        crashed  -422.064              0.100    -421.964  no      
+right_engine       crashed  -160.570              0.100    -160.470  no      
+random             crashed   -55.000              0.100     -54.900  no      
+ppo_waste_side_15  landed   -130.000             30.000    -100.000  no      
+ppo_waste_main_15  landed    -20.000             30.000      10.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 19  seed 40  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    110.000              0.000     110.000  yes     
+ppo_stochastic     landed    111.000              0.000     111.000  yes     
+left_engine        crashed  -292.904              0.000    -292.904  no      
+main_engine        crashed  -585.891              0.000    -585.891  no      
+right_engine       crashed  -373.549              0.000    -373.549  no      
+random             crashed   -49.000              0.000     -49.000  no      
+ppo_waste_side_15  landed     29.000              0.000      29.000  yes     
+ppo_waste_main_15  landed     69.000              0.000      69.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted                                                                 selected           flown 
+----  ----  -----  ----  -----------------------------------------------------------------------  -----------------  ------
+   0    21  0.500     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+   1    22  0.300     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_stochastic     landed
+   2    23  0.100     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_deterministic  landed
+   3    24  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   4    25  0.500     1  ppo_stochastic                                                           ppo_stochastic     landed
+   5    26  0.300     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+   6    27  0.100     3  ppo_deterministic, ppo_stochastic, ppo_waste_main_15                     ppo_deterministic  landed
+   7    28  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_side_15                     ppo_deterministic  landed
+   8    29  0.500     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   9    30  0.300     2  ppo_stochastic, ppo_waste_main_15                                        ppo_stochastic     landed
+  10    31  0.100     3  ppo_deterministic, ppo_stochastic, ppo_waste_side_15                     ppo_stochastic     landed
+  11    32  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_main_15                     ppo_deterministic  landed
+  12    33  0.500     2  ppo_deterministic, ppo_waste_main_15                                     ppo_deterministic  landed
+  13    34  0.300     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_deterministic  landed
+  14    35  0.100     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+  15    36  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+  16    37  0.500     1  ppo_deterministic                                                        ppo_deterministic  landed
+  17    38  0.300     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+  18    39  0.100     3  ppo_deterministic, ppo_stochastic, ppo_waste_main_15                     ppo_stochastic     landed
+  19    40  0.000     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_stochastic     landed
+
+=====================================================================================
+E4 run 1c -- as 1a but ONE pipeline for all steps (W_x grows on the repeated context)
+=====================================================================================
+
+===============================
+Run 1c -- fix OFF (raw epsilon)
+===============================
+
+step 0  seed 8  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.500      26.500  yes     
+ppo_stochastic     timeout  -341.000              0.500    -340.500  no      
+left_engine        crashed  -331.878              0.500    -331.378  no      
+main_engine        crashed  -472.251              0.500    -471.751  no      
+right_engine       crashed  -251.312              0.500    -250.812  no      
+random             crashed   -90.358              0.500     -89.858  no      
+ppo_waste_side_15  landed    -43.000              0.500     -42.500  no      
+ppo_waste_main_15  timeout  -373.000              0.500    -372.500  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+step 1  seed 8  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.300      26.300  yes     
+ppo_stochastic     timeout  -341.000              0.300    -340.700  no      
+left_engine        crashed  -331.878              0.300    -331.578  no      
+main_engine        crashed  -472.251              0.300    -471.951  no      
+right_engine       crashed  -251.312              0.300    -251.012  no      
+random             crashed   -90.358              0.300     -90.058  no      
+ppo_waste_side_15  landed    -43.000              0.300     -42.700  yes     
+ppo_waste_main_15  timeout  -373.000              0.300    -372.700  no      
+admitted: ['ppo_deterministic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 2  seed 8  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.100      26.100  yes     
+ppo_stochastic     timeout  -341.000              0.100    -340.900  no      
+left_engine        crashed  -331.878              0.100    -331.778  no      
+main_engine        crashed  -472.251              0.100    -472.151  no      
+right_engine       crashed  -251.312              0.100    -251.212  no      
+random             crashed   -90.358              0.100     -90.258  no      
+ppo_waste_side_15  landed    -43.000              0.100     -42.900  yes     
+ppo_waste_main_15  timeout  -373.000              0.100    -372.900  no      
+admitted: ['ppo_deterministic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 3  seed 8  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.000      26.000  yes     
+ppo_stochastic     timeout  -341.000              0.000    -341.000  no      
+left_engine        crashed  -331.878              0.000    -331.878  no      
+main_engine        crashed  -472.251              0.000    -472.251  no      
+right_engine       crashed  -251.312              0.000    -251.312  no      
+random             crashed   -90.358              0.000     -90.358  no      
+ppo_waste_side_15  landed    -43.000              0.000     -43.000  yes     
+ppo_waste_main_15  timeout  -373.000              0.000    -373.000  no      
+admitted: ['ppo_deterministic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted                              selected           flown 
+----  ----  -----  ----  ------------------------------------  -----------------  ------
+   0     8  0.500     1  ppo_deterministic                     ppo_deterministic  landed
+   1     8  0.300     2  ppo_deterministic, ppo_waste_side_15  ppo_deterministic  landed
+   2     8  0.100     2  ppo_deterministic, ppo_waste_side_15  ppo_deterministic  landed
+   3     8  0.000     2  ppo_deterministic, ppo_waste_side_15  ppo_deterministic  landed
+
+======================================
+Run 1c -- fix ON (guarded scale 300.0)
+======================================
+
+step 0  seed 8  eps=0.5000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000            150.000     176.000  yes     
+ppo_stochastic     timeout  -341.000            150.000    -191.000  no      
+left_engine        crashed  -331.878              0.500    -331.378  no      
+main_engine        crashed  -472.251              0.500    -471.751  no      
+right_engine       crashed  -251.312              0.500    -250.812  no      
+random             crashed   -90.358              0.500     -89.858  no      
+ppo_waste_side_15  landed    -43.000            150.000     107.000  yes     
+ppo_waste_main_15  timeout  -373.000            150.000    -223.000  no      
+admitted: ['ppo_deterministic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 1  seed 8  eps=0.3000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000             90.000     116.000  yes     
+ppo_stochastic     timeout  -341.000             90.000    -251.000  no      
+left_engine        crashed  -331.878              0.300    -331.578  no      
+main_engine        crashed  -472.251              0.300    -471.951  no      
+right_engine       crashed  -251.312              0.300    -251.012  no      
+random             crashed   -90.358              0.300     -90.058  no      
+ppo_waste_side_15  landed    -43.000             90.000      47.000  yes     
+ppo_waste_main_15  timeout  -373.000             90.000    -283.000  yes     
+admitted: ['ppo_deterministic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 2  seed 8  eps=0.1000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000             30.000      56.000  yes     
+ppo_stochastic     timeout  -341.000             30.000    -311.000  no      
+left_engine        crashed  -331.878              0.100    -331.778  no      
+main_engine        crashed  -472.251              0.100    -472.151  no      
+right_engine       crashed  -251.312              0.100    -251.212  no      
+random             crashed   -90.358              0.100     -90.258  no      
+ppo_waste_side_15  landed    -43.000             30.000     -13.000  no      
+ppo_waste_main_15  timeout  -373.000             30.000    -343.000  yes     
+admitted: ['ppo_deterministic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 3  seed 8  eps=0.0000  weights=[0.500, 0.500]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     26.000              0.000      26.000  yes     
+ppo_stochastic     timeout  -341.000              0.000    -341.000  no      
+left_engine        crashed  -331.878              0.000    -331.878  no      
+main_engine        crashed  -472.251              0.000    -472.251  no      
+right_engine       crashed  -251.312              0.000    -251.312  no      
+random             crashed   -90.358              0.000     -90.358  no      
+ppo_waste_side_15  landed    -43.000              0.000     -43.000  no      
+ppo_waste_main_15  timeout  -373.000              0.000    -373.000  no      
+admitted: ['ppo_deterministic']   selected: ppo_deterministic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted                                                 selected           flown 
+----  ----  -----  ----  -------------------------------------------------------  -----------------  ------
+   0     8  0.500     2  ppo_deterministic, ppo_waste_side_15                     ppo_deterministic  landed
+   1     8  0.300     3  ppo_deterministic, ppo_waste_main_15, ppo_waste_side_15  ppo_deterministic  landed
+   2     8  0.100     2  ppo_deterministic, ppo_waste_main_15                     ppo_deterministic  landed
+   3     8  0.000     1  ppo_deterministic                                        ppo_deterministic  landed
+
+=================================================
+E4 run 2 -- the real MetaMo governor, seeds 21-30
+=================================================
+real MetaMo governor: appraisal scales from seed 21: payoff_scale=75.0 motive_scale=220.9
+
+==============================
+Run 2 -- fix OFF (raw epsilon)
+==============================
+
+step 0  seed 21  eps=0.1000  weights=[0.632, 0.368]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     72.000              0.100      72.100  yes     
+ppo_stochastic     landed     80.000              0.100      80.100  yes     
+left_engine        crashed  -244.787              0.100    -244.687  no      
+main_engine        crashed  -516.234              0.100    -516.134  no      
+right_engine       crashed  -325.045              0.100    -324.945  no      
+random             crashed  -214.676              0.100    -214.576  no      
+ppo_waste_side_15  timeout  -271.000              0.100    -270.900  no      
+ppo_waste_main_15  timeout  -177.000              0.100    -176.900  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 1  seed 22  eps=0.0107  weights=[0.737, 0.263]  baseline payoff=-100
+candidate          outcome  margin     tolerance eps_env  margin+tol  admitted
+-----------------  -------  ---------  -----------------  ----------  --------
+ppo_deterministic  landed     102.000              0.011     102.011  yes     
+ppo_stochastic     landed     105.000              0.011     105.011  yes     
+left_engine        crashed   -403.870              0.011    -403.859  no      
+main_engine        crashed  -1.01e+03              0.011   -1.01e+03  no      
+right_engine       crashed   -410.131              0.011    -410.120  no      
+random             crashed   -102.717              0.011    -102.707  no      
+ppo_waste_side_15  landed      77.000              0.011      77.011  yes     
+ppo_waste_main_15  landed      13.000              0.011      13.011  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 2  seed 23  eps=0.0000  weights=[0.791, 0.209]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     80.000              0.000      80.000  yes     
+ppo_stochastic     landed     76.000              0.000      76.000  yes     
+left_engine        crashed  -423.800              0.000    -423.800  no      
+main_engine        crashed  -530.773              0.000    -530.773  no      
+right_engine       crashed  -466.278              0.000    -466.278  no      
+random             crashed  -239.518              0.000    -239.518  no      
+ppo_waste_side_15  landed     18.000              0.000      18.000  yes     
+ppo_waste_main_15  landed      1.000              0.000       1.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_waste_main_15   flown outcome: landed
+
+step 3  seed 24  eps=0.0000  weights=[0.801, 0.199]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    105.000              0.000     105.000  yes     
+ppo_stochastic     landed     89.000              0.000      89.000  yes     
+left_engine        crashed  -170.923              0.000    -170.923  no      
+main_engine        crashed  -433.778              0.000    -433.778  no      
+right_engine       crashed  -228.247              0.000    -228.247  no      
+random             crashed   -55.000              0.000     -55.000  no      
+ppo_waste_side_15  timeout  -236.000              0.000    -236.000  no      
+ppo_waste_main_15  timeout  -149.000              0.000    -149.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 4  seed 25  eps=0.0000  weights=[0.781, 0.219]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  crashed  -166.000              0.000    -166.000  no      
+ppo_stochastic     landed    105.000              0.000     105.000  yes     
+left_engine        crashed  -739.983              0.000    -739.983  no      
+main_engine        crashed  -841.814              0.000    -841.814  no      
+right_engine       crashed  -689.444              0.000    -689.444  no      
+random             crashed  -318.160              0.000    -318.160  no      
+ppo_waste_side_15  crashed  -202.000              0.000    -202.000  no      
+ppo_waste_main_15  crashed  -198.000              0.000    -198.000  no      
+admitted: ['ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 5  seed 26  eps=0.0000  weights=[0.767, 0.233]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     71.000              0.000      71.000  yes     
+ppo_stochastic     landed     75.000              0.000      75.000  yes     
+left_engine        crashed  -220.300              0.000    -220.300  no      
+main_engine        crashed  -379.073              0.000    -379.073  no      
+right_engine       crashed  -490.306              0.000    -490.306  no      
+random             crashed  -256.023              0.000    -256.023  no      
+ppo_waste_side_15  landed   -132.000              0.000    -132.000  no      
+ppo_waste_main_15  timeout  -176.000              0.000    -176.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 6  seed 27  eps=0.0000  weights=[0.759, 0.241]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     82.000              0.000      82.000  yes     
+ppo_stochastic     landed     78.000              0.000      78.000  yes     
+left_engine        crashed  -646.140              0.000    -646.140  no      
+main_engine        crashed  -613.966              0.000    -613.966  no      
+right_engine       crashed  -690.169              0.000    -690.169  no      
+random             crashed  -129.557              0.000    -129.557  no      
+ppo_waste_side_15  landed    -53.000              0.000     -53.000  no      
+ppo_waste_main_15  landed     18.000              0.000      18.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 7  seed 28  eps=0.0000  weights=[0.753, 0.247]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     91.000              0.000      91.000  yes     
+ppo_stochastic     landed     97.000              0.000      97.000  yes     
+left_engine        crashed  -126.515              0.000    -126.515  no      
+main_engine        crashed  -421.653              0.000    -421.653  no      
+right_engine       crashed  -286.982              0.000    -286.982  no      
+random             crashed  -116.506              0.000    -116.506  no      
+ppo_waste_side_15  landed     19.000              0.000      19.000  yes     
+ppo_waste_main_15  landed     -3.000              0.000      -3.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 8  seed 29  eps=0.0000  weights=[0.748, 0.252]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     76.000              0.000      76.000  yes     
+ppo_stochastic     landed     74.000              0.000      74.000  yes     
+left_engine        crashed  -659.146              0.000    -659.146  no      
+main_engine        crashed  -497.241              0.000    -497.241  no      
+right_engine       crashed  -783.905              0.000    -783.905  no      
+random             crashed  -254.622              0.000    -254.622  no      
+ppo_waste_side_15  timeout  -253.000              0.000    -253.000  no      
+ppo_waste_main_15  timeout  -276.000              0.000    -276.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 9  seed 30  eps=0.0000  weights=[0.745, 0.255]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  timeout  -404.000              0.000    -404.000  no      
+ppo_stochastic     landed     83.000              0.000      83.000  yes     
+left_engine        crashed  -341.591              0.000    -341.591  no      
+main_engine        crashed  -503.699              0.000    -503.699  no      
+right_engine       crashed  -393.450              0.000    -393.450  no      
+random             crashed   -63.460              0.000     -63.460  no      
+ppo_waste_side_15  landed   -318.000              0.000    -318.000  no      
+ppo_waste_main_15  landed      4.000              0.000       4.000  yes     
+admitted: ['ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_stochastic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted                                                                 selected           flown 
+----  ----  -----  ----  -----------------------------------------------------------------------  -----------------  ------
+   0    21  0.100     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+   1    22  0.011     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_stochastic     landed
+   2    23  0.000     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_waste_main_15  landed
+   3    24  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   4    25  0.000     1  ppo_stochastic                                                           ppo_stochastic     landed
+   5    26  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   6    27  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_main_15                     ppo_deterministic  landed
+   7    28  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_side_15                     ppo_deterministic  landed
+   8    29  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   9    30  0.000     2  ppo_stochastic, ppo_waste_main_15                                        ppo_stochastic     landed
+real MetaMo governor: appraisal scales from seed 21: payoff_scale=75.0 motive_scale=220.9
+
+=====================================
+Run 2 -- fix ON (guarded scale 300.0)
+=====================================
+
+step 0  seed 21  eps=0.1000  weights=[0.632, 0.368]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     72.000             30.000     102.000  yes     
+ppo_stochastic     landed     80.000             30.000     110.000  yes     
+left_engine        crashed  -244.787              0.100    -244.687  no      
+main_engine        crashed  -516.234              0.100    -516.134  no      
+right_engine       crashed  -325.045              0.100    -324.945  no      
+random             crashed  -214.676              0.100    -214.576  no      
+ppo_waste_side_15  timeout  -271.000             30.000    -241.000  no      
+ppo_waste_main_15  timeout  -177.000             30.000    -147.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 1  seed 22  eps=0.0107  weights=[0.737, 0.263]  baseline payoff=-100
+candidate          outcome  margin     tolerance eps_env  margin+tol  admitted
+-----------------  -------  ---------  -----------------  ----------  --------
+ppo_deterministic  landed     102.000              3.206     105.206  yes     
+ppo_stochastic     landed     105.000              3.206     108.206  yes     
+left_engine        crashed   -403.870              0.011    -403.859  no      
+main_engine        crashed  -1.01e+03              0.011   -1.01e+03  no      
+right_engine       crashed   -410.131              0.011    -410.120  no      
+random             crashed   -102.717              0.011    -102.707  no      
+ppo_waste_side_15  landed      77.000              3.206      80.206  yes     
+ppo_waste_main_15  landed      13.000              3.206      16.206  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_stochastic   flown outcome: landed
+
+step 2  seed 23  eps=0.0000  weights=[0.791, 0.209]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     80.000              0.000      80.000  yes     
+ppo_stochastic     landed     76.000              0.000      76.000  yes     
+left_engine        crashed  -423.800              0.000    -423.800  no      
+main_engine        crashed  -530.773              0.000    -530.773  no      
+right_engine       crashed  -466.278              0.000    -466.278  no      
+random             crashed  -239.518              0.000    -239.518  no      
+ppo_waste_side_15  landed     18.000              0.000      18.000  yes     
+ppo_waste_main_15  landed      1.000              0.000       1.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15', 'ppo_waste_side_15']   selected: ppo_waste_main_15   flown outcome: landed
+
+step 3  seed 24  eps=0.0000  weights=[0.801, 0.199]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed    105.000              0.000     105.000  yes     
+ppo_stochastic     landed     89.000              0.000      89.000  yes     
+left_engine        crashed  -170.923              0.000    -170.923  no      
+main_engine        crashed  -433.778              0.000    -433.778  no      
+right_engine       crashed  -228.247              0.000    -228.247  no      
+random             crashed   -55.000              0.000     -55.000  no      
+ppo_waste_side_15  timeout  -236.000              0.000    -236.000  no      
+ppo_waste_main_15  timeout  -149.000              0.000    -149.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 4  seed 25  eps=0.0000  weights=[0.781, 0.219]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  crashed  -166.000              0.000    -166.000  no      
+ppo_stochastic     landed    105.000              0.000     105.000  yes     
+left_engine        crashed  -739.983              0.000    -739.983  no      
+main_engine        crashed  -841.814              0.000    -841.814  no      
+right_engine       crashed  -689.444              0.000    -689.444  no      
+random             crashed  -318.160              0.000    -318.160  no      
+ppo_waste_side_15  crashed  -202.000              0.000    -202.000  no      
+ppo_waste_main_15  crashed  -198.000              0.000    -198.000  no      
+admitted: ['ppo_stochastic']   selected: ppo_stochastic   flown outcome: landed
+
+step 5  seed 26  eps=0.0000  weights=[0.767, 0.233]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     71.000              0.000      71.000  yes     
+ppo_stochastic     landed     75.000              0.000      75.000  yes     
+left_engine        crashed  -220.300              0.000    -220.300  no      
+main_engine        crashed  -379.073              0.000    -379.073  no      
+right_engine       crashed  -490.306              0.000    -490.306  no      
+random             crashed  -256.023              0.000    -256.023  no      
+ppo_waste_side_15  landed   -132.000              0.000    -132.000  no      
+ppo_waste_main_15  timeout  -176.000              0.000    -176.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 6  seed 27  eps=0.0000  weights=[0.759, 0.241]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     82.000              0.000      82.000  yes     
+ppo_stochastic     landed     78.000              0.000      78.000  yes     
+left_engine        crashed  -646.140              0.000    -646.140  no      
+main_engine        crashed  -613.966              0.000    -613.966  no      
+right_engine       crashed  -690.169              0.000    -690.169  no      
+random             crashed  -129.557              0.000    -129.557  no      
+ppo_waste_side_15  landed    -53.000              0.000     -53.000  no      
+ppo_waste_main_15  landed     18.000              0.000      18.000  yes     
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 7  seed 28  eps=0.0000  weights=[0.753, 0.247]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     91.000              0.000      91.000  yes     
+ppo_stochastic     landed     97.000              0.000      97.000  yes     
+left_engine        crashed  -126.515              0.000    -126.515  no      
+main_engine        crashed  -421.653              0.000    -421.653  no      
+right_engine       crashed  -286.982              0.000    -286.982  no      
+random             crashed  -116.506              0.000    -116.506  no      
+ppo_waste_side_15  landed     19.000              0.000      19.000  yes     
+ppo_waste_main_15  landed     -3.000              0.000      -3.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic', 'ppo_waste_side_15']   selected: ppo_deterministic   flown outcome: landed
+
+step 8  seed 29  eps=0.0000  weights=[0.748, 0.252]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  landed     76.000              0.000      76.000  yes     
+ppo_stochastic     landed     74.000              0.000      74.000  yes     
+left_engine        crashed  -659.146              0.000    -659.146  no      
+main_engine        crashed  -497.241              0.000    -497.241  no      
+right_engine       crashed  -783.905              0.000    -783.905  no      
+random             crashed  -254.622              0.000    -254.622  no      
+ppo_waste_side_15  timeout  -253.000              0.000    -253.000  no      
+ppo_waste_main_15  timeout  -276.000              0.000    -276.000  no      
+admitted: ['ppo_deterministic', 'ppo_stochastic']   selected: ppo_deterministic   flown outcome: landed
+
+step 9  seed 30  eps=0.0000  weights=[0.745, 0.255]  baseline payoff=-100
+candidate          outcome  margin    tolerance eps_env  margin+tol  admitted
+-----------------  -------  --------  -----------------  ----------  --------
+ppo_deterministic  timeout  -404.000              0.000    -404.000  no      
+ppo_stochastic     landed     83.000              0.000      83.000  yes     
+left_engine        crashed  -341.591              0.000    -341.591  no      
+main_engine        crashed  -503.699              0.000    -503.699  no      
+right_engine       crashed  -393.450              0.000    -393.450  no      
+random             crashed   -63.460              0.000     -63.460  no      
+ppo_waste_side_15  landed   -318.000              0.000    -318.000  no      
+ppo_waste_main_15  landed      4.000              0.000       4.000  yes     
+admitted: ['ppo_stochastic', 'ppo_waste_main_15']   selected: ppo_stochastic   flown outcome: landed
+
+summary:
+step  seed  eps    #adm  admitted                                                                 selected           flown 
+----  ----  -----  ----  -----------------------------------------------------------------------  -----------------  ------
+   0    21  0.100     2  ppo_deterministic, ppo_stochastic                                        ppo_stochastic     landed
+   1    22  0.011     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_stochastic     landed
+   2    23  0.000     4  ppo_deterministic, ppo_stochastic, ppo_waste_main_15, ppo_waste_side_15  ppo_waste_main_15  landed
+   3    24  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   4    25  0.000     1  ppo_stochastic                                                           ppo_stochastic     landed
+   5    26  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   6    27  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_main_15                     ppo_deterministic  landed
+   7    28  0.000     3  ppo_deterministic, ppo_stochastic, ppo_waste_side_15                     ppo_deterministic  landed
+   8    29  0.000     2  ppo_deterministic, ppo_stochastic                                        ppo_deterministic  landed
+   9    30  0.000     2  ppo_stochastic, ppo_waste_main_15                                        ppo_stochastic     landed
+
+========================================================
+E4 summary -- does the admitted set change with epsilon?
+========================================================
+run  fix  eps range     admitted-set changes between steps  step pairs  total admissions
+---  ---  ------------  ----------------------------------  ----------  ----------------
+1a   off  0.000..0.500                                   0           3                 4
+1a   on   0.000..0.500                                   1           3                 6
+1b   off  0.000..0.500                                  15          19                47
+1b   on   0.000..0.500                                  17          19                51
+1c   off  0.000..0.500                                   1           3                 7
+1c   on   0.000..0.500                                   3           3                 8
+  2  off  0.000..0.100                                   8           9                25
+  2  on   0.000..0.100                                   8           9                25
+
+fix on vs fix off, step by step (same seeds, same governor script):
+run  steps whose admitted set differs  steps     
+---  --------------------------------  ----------
+1a   2/4                               0, 1      
+1b   3/20                              12, 13, 18
+1c   4/4                               0, 1, 2, 3
+  2  0/10                              -         
+run 1a (only epsilon varies): fix off -> 1 distinct admitted set(s); fix on -> 2 distinct admitted sets over eps [0.5, 0.3, 0.1, 0.0]

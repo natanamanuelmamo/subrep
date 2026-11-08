@@ -1,0 +1,20 @@
+﻿
+=============================================================
+E5 -- the guarded epsilon scale on the Minecraft stub (m = 6)
+=============================================================
+calibration: 160 decisions from episodes 1-20; mean|dr|=0.0020, mean|dn|=0.0400, floor=0.01; scale = max(s_r,floor)+max(s_n,floor) = 0.0500
+evaluation: 160 decisions x 5 candidates from episodes 21-40; raw margins min=-0.0826 median=-0.0354 max=-0.0146
+with the fix, eps in [0, 0.5] maps to a tolerance in [0, 0.0250]
+guard fired (candidate's own task payoff < 0): 0 times
+
+gate                    eps=0  eps=0.05  eps=0.1  eps=0.2  eps=0.3  eps=0.5  flips 0->0.5  seeds  cands  mono viol
+----------------------  -----  --------  -------  -------  -------  -------  ------------  -----  -----  ---------
+raw eps (fix off)       0/800  560/800   800/800  800/800  800/800  800/800  800 (100.0%)     20      5          0
+guarded scale (fix on)  0/800  0/800     0/800    0/800    20/800   200/800  200 (25.0%)      20      2          0
+margins epsilon can decide: raw band [-0.5, 0): 800/800; fixed band [-0.0250, 0): 200/800
+
+===============================
+Minecraft and bridge test files
+===============================
+command: python -m pytest tests/test_minecraft_stub.py tests/test_minecraft_rollout.py tests/test_run_metamo_pipeline.py tests/test_bridge_budget.py tests/test_bridge_controller.py tests/test_bridge_e2e.py tests/test_bridge_governor.py tests/test_bridge_weights.py tests/test_bridge_epsilon_scale.py -q -p no:cacheprovider
+153 passed in 5.06s
