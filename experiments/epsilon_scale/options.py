@@ -19,6 +19,9 @@ vectors of length m.
     E  rank           mu = rank / (K - 1) - 1   within the step's candidate set
     G  tanh           mu = tanh((dr + min_i dn_i) / s_n)    (eps_env = s_n * atanh(eps))
     H  declared unit  mu = (dr + min_i dn_i) / u_env        (u_env declared by the env)
+    I  guarded        any of C1/C2/G/D/H, but only for candidates whose own task
+                      payoff (baseline payoff + dr) is not a failure (>= 0);
+                      failing candidates keep the raw gate.
 
 Options C, D, G and H divide the raw margin by a positive number, so they never
 change the records -- equivalently, they convert epsilon into environment
@@ -144,6 +147,25 @@ def make_mu_H(unit: float = LUNAR_DECLARED_UNIT) -> MuFn:
     return mu_H
 
 
+# Option I -- guarded epsilon scaling (own addition, after the first E1 run).
+# The scaled tolerance applies only to candidates whose OWN task payoff is not
+# a failure: own payoff = baseline payoff + delta_r >= FAILURE_THRESHOLD.
+# Failing candidates keep the raw gate (mu = raw margin, eps in raw units),
+# i.e. exactly today's behaviour for them. On LunarLander a crash has own
+# payoff -100, a timeout 0 and a landing +100; on the Minecraft stub the task
+# reward is never negative, so the guard never fires there.
+FAILURE_THRESHOLD = 0.0
+
+
+def guarded(base: MuFn, threshold: float = FAILURE_THRESHOLD) -> MuFn:
+    def mu_guarded(step: StepInput, scales: Optional[Scales]) -> np.ndarray:
+        scaled = np.asarray(base(step, scales), dtype=np.float64)
+        own_payoff = step.baseline_payoff + step.delta_r
+        return np.where(own_payoff >= threshold, scaled, _raw(step))
+
+    return mu_guarded
+
+
 def identity_transform(step: StepInput, scales: Optional[Scales]):
     return step.delta_r, step.delta_n
 
@@ -195,6 +217,16 @@ def build_options(
         Option("H", "H", "none", make_mu_H(declared_unit), identity_transform, False,
                f"eps_env = eps*{declared_unit:g} (declared)")
     )
+    # Option I: the epsilon-scaling families (records unchanged) behind the
+    # failure guard.
+    for family, mu in (("C1", mu_C1), ("C2", mu_C2), ("G", mu_G)):
+        for source in ("fixed", "per-step"):
+            options.append(Option(f"I:{family}-{source}", "I", source, guarded(mu), identity_transform,
+                                  False, f"guarded {family}"))
+    options.append(Option("I:D", "I", "none", guarded(make_mu_D(floor)), identity_transform, False,
+                          "guarded D"))
+    options.append(Option("I:H", "I", "none", guarded(make_mu_H(declared_unit)), identity_transform,
+                          False, "guarded H"))
     return options
 
 

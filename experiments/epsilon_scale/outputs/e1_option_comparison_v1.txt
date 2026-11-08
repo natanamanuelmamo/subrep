@@ -1,0 +1,146 @@
+﻿
+===============================================
+E1 -- option comparison on held-out seeds 21-40
+===============================================
+fixed scales (seeds 1-20, extended set, pooled): s_r=50.00 s_n=250.12 s_i=[404.5, 95.8]
+admit iff mu >= -eps; flips = pairs whose admission differs between eps=0 and eps=0.5
+crit1: flips >= 10% of pairs, >= 5 seeds, >= 2 candidates | crit2: no crash admitted at any eps
+crit3: >= 95% of ppo_deterministic landings admitted at eps=0.1 | crit4: 0 monotonicity violations
+
+==============================
+Summary -- task's extended set
+==============================
+option       flips   share  seeds  cands  crash adm  det@0.1  mono viol  c1    c2    c3    c4  
+-----------  ------  -----  -----  -----  ---------  -------  ---------  ----  ----  ----  ----
+F            0/160    0.0%      0      0  0/121      18/18            0  fail  PASS  PASS  PASS
+A-fixed      39/160  24.4%     20      4  38/121     18/18            0  PASS  fail  PASS  PASS
+A-per-step   36/160  22.5%     20      5  34/121     18/18            0  PASS  fail  PASS  PASS
+B-fixed      12/160   7.5%     10      3  11/121     18/18            0  fail  fail  PASS  PASS
+B-per-step   5/160    3.1%      4      2  5/121      18/18            0  fail  fail  PASS  PASS
+C1-fixed     38/160  23.8%     20      3  38/121     18/18            0  PASS  fail  PASS  PASS
+C1-per-step  34/160  21.2%     20      3  34/121     18/18            0  PASS  fail  PASS  PASS
+C2-fixed     43/160  26.9%     20      5  42/121     18/18            0  PASS  fail  PASS  PASS
+C2-per-step  37/160  23.1%     20      3  36/121     18/18            0  PASS  fail  PASS  PASS
+G-fixed      42/160  26.2%     20      5  41/121     18/18            0  PASS  fail  PASS  PASS
+G-per-step   36/160  22.5%     20      3  36/121     18/18            0  PASS  fail  PASS  PASS
+D            16/160  10.0%      9      3  16/121     18/18            0  PASS  fail  PASS  PASS
+E            60/160  37.5%     20      5  43/121     10/18            0  PASS  fail  fail  PASS
+H            5/160    3.1%      5      3  5/121      18/18            0  fail  fail  PASS  PASS
+
+===================================================
+Admissions over the eps grid -- task's extended set
+===================================================
+option       eps=0   eps=0.05  eps=0.1  eps=0.2  eps=0.3  eps=0.5
+-----------  ------  --------  -------  -------  -------  -------
+F            36/160  36/160    36/160   36/160   36/160   36/160 
+A-fixed      38/160  39/160    39/160   44/160   70/160   77/160 
+A-per-step   37/160  38/160    38/160   39/160   47/160   73/160 
+B-fixed      36/160  36/160    36/160   36/160   36/160   48/160 
+B-per-step   36/160  36/160    36/160   36/160   36/160   41/160 
+C1-fixed     36/160  36/160    36/160   41/160   67/160   74/160 
+C1-per-step  36/160  36/160    36/160   36/160   44/160   70/160 
+C2-fixed     36/160  36/160    36/160   54/160   69/160   79/160 
+C2-per-step  36/160  36/160    36/160   39/160   61/160   73/160 
+G-fixed      36/160  36/160    36/160   41/160   67/160   78/160 
+G-per-step   36/160  36/160    36/160   36/160   45/160   72/160 
+D            36/160  36/160    36/160   36/160   37/160   52/160 
+E            20/160  20/160    20/160   40/160   60/160   80/160 
+H            36/160  36/160    36/160   36/160   36/160   41/160 
+
+================================================================================================
+Which candidates flip (count by candidate; outcome of the flipping pairs) -- task's extended set
+================================================================================================
+option       flipping candidates                                                                                flip outcomes                   
+-----------  -------------------------------------------------------------------------------------------------  --------------------------------
+F            -                                                                                                  -                               
+A-fixed      ppo_deterministic:1, ppo_noisy_actions:19, ppo_then_side_tradeoff:9, random:10                     crashed:38, timeout:1           
+A-per-step   ppo_deterministic:1, ppo_noisy_actions:19, ppo_stochastic:1, ppo_then_side_tradeoff:6, random:9    crashed:34, timeout:2           
+B-fixed      ppo_noisy_actions:1, ppo_then_side_tradeoff:10, random:1                                           crashed:11, timeout:1           
+B-per-step   ppo_then_side_tradeoff:3, random:2                                                                 crashed:5                       
+C1-fixed     ppo_noisy_actions:19, ppo_then_side_tradeoff:9, random:10                                          crashed:38                      
+C1-per-step  ppo_noisy_actions:19, ppo_then_side_tradeoff:6, random:9                                           crashed:34                      
+C2-fixed     left_engine:1, ppo_noisy_actions:20, ppo_then_side_tradeoff:10, random:11, right_engine:1          crashed:42, timeout:1           
+C2-per-step  ppo_noisy_actions:20, ppo_then_side_tradeoff:7, random:10                                          crashed:36, timeout:1           
+G-fixed      left_engine:1, ppo_noisy_actions:20, ppo_then_side_tradeoff:9, random:11, right_engine:1           crashed:41, timeout:1           
+G-per-step   ppo_noisy_actions:19, ppo_then_side_tradeoff:7, random:10                                          crashed:36                      
+D            ppo_noisy_actions:7, ppo_then_side_tradeoff:5, random:4                                            crashed:16                      
+E            ppo_deterministic:9, ppo_noisy_actions:19, ppo_stochastic:8, ppo_then_side_tradeoff:13, random:11  crashed:43, landed:16, timeout:1
+H            ppo_noisy_actions:1, ppo_then_side_tradeoff:3, random:1                                            crashed:5                       
+
+===========================================
+Summary -- extended + borderline candidates
+===========================================
+option       flips    share  seeds  cands  crash adm  det@0.1  mono viol  c1    c2    c3    c4  
+-----------  -------  -----  -----  -----  ---------  -------  ---------  ----  ----  ----  ----
+F            0/280     0.0%      0      0  0/207      18/18            0  fail  PASS  PASS  PASS
+A-fixed      123/280  43.9%     20     10  122/207    18/18            0  PASS  fail  PASS  PASS
+A-per-step   88/280   31.4%     20      9  87/207     18/18            0  PASS  fail  PASS  PASS
+B-fixed      35/280   12.5%     20      6  33/207     18/18            0  PASS  fail  PASS  PASS
+B-per-step   26/280    9.3%     20      5  26/207     18/18            0  fail  fail  PASS  PASS
+C1-fixed     127/280  45.4%     20      9  122/207    18/18            0  PASS  fail  PASS  PASS
+C1-per-step  91/280   32.5%     20      9  87/207     18/18            0  PASS  fail  PASS  PASS
+C2-fixed     133/280  47.5%     20     11  126/207    18/18            0  PASS  fail  PASS  PASS
+C2-per-step  119/280  42.5%     20      9  114/207    18/18            0  PASS  fail  PASS  PASS
+G-fixed      132/280  47.1%     20     11  125/207    18/18            0  PASS  fail  PASS  PASS
+G-per-step   106/280  37.9%     20      9  101/207    18/18            0  PASS  fail  PASS  PASS
+D            51/280   18.2%     19      7  50/207     18/18            0  PASS  fail  PASS  PASS
+E            121/280  43.2%     20     11  74/207     9/18             0  PASS  fail  fail  PASS
+H            24/280    8.6%     17      6  23/207     18/18            0  fail  fail  PASS  PASS
+
+flips counted on the borderline candidates only (what the option does when such skills exist):
+option       flips   share  seeds  cands  crash adm
+-----------  ------  -----  -----  -----  ---------
+F            0/120    0.0%      0      0  0/86     
+A-fixed      84/120  70.0%     20      6  84/86    
+A-per-step   59/120  49.2%     20      6  58/86    
+B-fixed      23/120  19.2%     20      3  22/86    
+B-per-step   21/120  17.5%     20      2  21/86    
+C1-fixed     89/120  74.2%     20      6  84/86    
+C1-per-step  62/120  51.7%     20      6  58/86    
+C2-fixed     90/120  75.0%     20      6  84/86    
+C2-per-step  86/120  71.7%     20      6  81/86    
+G-fixed      90/120  75.0%     20      6  84/86    
+G-per-step   74/120  61.7%     20      6  69/86    
+D            35/120  29.2%     19      4  34/86    
+E            73/120  60.8%     20      6  50/86    
+H            19/120  15.8%     17      3  18/86    
+
+================================================================
+Admissions over the eps grid -- extended + borderline candidates
+================================================================
+option       eps=0   eps=0.05  eps=0.1  eps=0.2  eps=0.3  eps=0.5
+-----------  ------  --------  -------  -------  -------  -------
+F            63/280  63/280    63/280   63/280   63/280   63/280 
+A-fixed      72/280  76/280    78/280   96/280   165/280  195/280
+A-per-step   70/280  73/280    73/280   77/280   89/280   158/280
+B-fixed      68/280  70/280    71/280   75/280   80/280   103/280
+B-per-step   68/280  70/280    71/280   73/280   78/280   94/280 
+C1-fixed     63/280  66/280    68/280   87/280   159/280  190/280
+C1-per-step  63/280  66/280    66/280   70/280   83/280   154/280
+C2-fixed     63/280  66/280    72/280   114/280  176/280  196/280
+C2-per-step  63/280  66/280    67/280   79/280   117/280  182/280
+G-fixed      63/280  66/280    68/280   87/280   160/280  195/280
+G-per-step   63/280  66/280    66/280   70/280   84/280   169/280
+D            63/280  65/280    66/280   68/280   76/280   114/280
+E            19/280  21/280    35/280   62/280   80/280   140/280
+H            63/280  65/280    66/280   67/280   72/280   87/280 
+
+=============================================================================================================
+Which candidates flip (count by candidate; outcome of the flipping pairs) -- extended + borderline candidates
+=============================================================================================================
+option       flipping candidates                                                                                                                                                                                                         flip outcomes                   
+-----------  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  --------------------------------
+F            -                                                                                                                                                                                                                           -                               
+A-fixed      ppo_deterministic:1, ppo_greedy_p10:5, ppo_greedy_p20:15, ppo_greedy_p30:19, ppo_noisy_actions:19, ppo_then_noop_100:16, ppo_then_noop_150:9, ppo_then_noop_50:20, ppo_then_side_tradeoff:9, random:10                      crashed:122, timeout:1          
+A-per-step   ppo_greedy_p10:1, ppo_greedy_p20:12, ppo_greedy_p30:15, ppo_noisy_actions:17, ppo_then_noop_100:10, ppo_then_noop_150:2, ppo_then_noop_50:19, ppo_then_side_tradeoff:6, random:6                                            crashed:87, timeout:1           
+B-fixed      ppo_greedy_p20:1, ppo_noisy_actions:1, ppo_then_noop_100:2, ppo_then_noop_50:20, ppo_then_side_tradeoff:10, random:1                                                                                                        crashed:33, timeout:2           
+B-per-step   ppo_greedy_p30:1, ppo_noisy_actions:1, ppo_then_noop_50:20, ppo_then_side_tradeoff:3, random:1                                                                                                                              crashed:26                      
+C1-fixed     ppo_greedy_p10:6, ppo_greedy_p20:18, ppo_greedy_p30:20, ppo_noisy_actions:19, ppo_then_noop_100:16, ppo_then_noop_150:9, ppo_then_noop_50:20, ppo_then_side_tradeoff:9, random:10                                           crashed:122, landed:5           
+C1-per-step  ppo_greedy_p10:2, ppo_greedy_p20:13, ppo_greedy_p30:16, ppo_noisy_actions:17, ppo_then_noop_100:10, ppo_then_noop_150:2, ppo_then_noop_50:19, ppo_then_side_tradeoff:6, random:6                                            crashed:87, landed:4            
+C2-fixed     left_engine:1, ppo_greedy_p10:6, ppo_greedy_p20:19, ppo_greedy_p30:20, ppo_noisy_actions:20, ppo_then_noop_100:16, ppo_then_noop_150:9, ppo_then_noop_50:20, ppo_then_side_tradeoff:10, random:11, right_engine:1           crashed:126, landed:5, timeout:2
+C2-per-step  ppo_greedy_p10:6, ppo_greedy_p20:18, ppo_greedy_p30:20, ppo_noisy_actions:19, ppo_then_noop_100:16, ppo_then_noop_150:6, ppo_then_noop_50:20, ppo_then_side_tradeoff:7, random:7                                            crashed:114, landed:5           
+G-fixed      left_engine:1, ppo_greedy_p10:6, ppo_greedy_p20:19, ppo_greedy_p30:20, ppo_noisy_actions:20, ppo_then_noop_100:16, ppo_then_noop_150:9, ppo_then_noop_50:20, ppo_then_side_tradeoff:9, random:11, right_engine:1            crashed:125, landed:5, timeout:2
+G-per-step   ppo_greedy_p10:4, ppo_greedy_p20:17, ppo_greedy_p30:18, ppo_noisy_actions:19, ppo_then_noop_100:10, ppo_then_noop_150:5, ppo_then_noop_50:20, ppo_then_side_tradeoff:6, random:7                                            crashed:101, landed:5           
+D            ppo_greedy_p20:7, ppo_greedy_p30:5, ppo_noisy_actions:7, ppo_then_noop_100:5, ppo_then_noop_50:18, ppo_then_side_tradeoff:5, random:4                                                                                       crashed:50, landed:1            
+E            ppo_deterministic:14, ppo_greedy_p10:11, ppo_greedy_p20:11, ppo_greedy_p30:11, ppo_noisy_actions:16, ppo_stochastic:10, ppo_then_noop_100:9, ppo_then_noop_150:11, ppo_then_noop_50:20, ppo_then_side_tradeoff:5, random:3  crashed:74, landed:47           
+H            ppo_greedy_p20:1, ppo_noisy_actions:1, ppo_then_noop_100:2, ppo_then_noop_50:16, ppo_then_side_tradeoff:3, random:1                                                                                                         crashed:23, landed:1            

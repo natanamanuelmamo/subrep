@@ -1,0 +1,105 @@
+﻿
+=================================================
+E3 -- selection impact vs raw units (seeds 21-40)
+=================================================
+weights w = (w_Safety, 1 - w_Safety), w_Safety in (0.2, 0.5, 0.8); eps in (0.1, 0.5)
+
+===================
+Candidate set: task
+===================
+option         eps    selection changed  share  admission-driven  score-driven  rewrites records
+-------------  -----  -----------------  -----  ----------------  ------------  ----------------
+F              0.100  0/60                0.0%                 0             0  no              
+F              0.500  0/60                0.0%                 0             0  no              
+A-fixed        0.100  0/60                0.0%                 0             0  yes             
+A-fixed        0.500  0/60                0.0%                 0             0  yes             
+A-per-step     0.100  0/60                0.0%                 0             0  yes             
+A-per-step     0.500  0/60                0.0%                 0             0  yes             
+B-fixed        0.100  4/60                6.7%                 0             4  yes             
+B-fixed        0.500  4/60                6.7%                 0             4  yes             
+B-per-step     0.100  4/60                6.7%                 0             4  yes             
+B-per-step     0.500  4/60                6.7%                 0             4  yes             
+C1-fixed       0.100  0/60                0.0%                 0             0  no              
+C1-fixed       0.500  0/60                0.0%                 0             0  no              
+C1-per-step    0.100  0/60                0.0%                 0             0  no              
+C1-per-step    0.500  0/60                0.0%                 0             0  no              
+C2-fixed       0.100  0/60                0.0%                 0             0  no              
+C2-fixed       0.500  0/60                0.0%                 0             0  no              
+C2-per-step    0.100  0/60                0.0%                 0             0  no              
+C2-per-step    0.500  0/60                0.0%                 0             0  no              
+G-fixed        0.100  0/60                0.0%                 0             0  no              
+G-fixed        0.500  0/60                0.0%                 0             0  no              
+G-per-step     0.100  0/60                0.0%                 0             0  no              
+G-per-step     0.500  0/60                0.0%                 0             0  no              
+D              0.100  0/60                0.0%                 0             0  no              
+D              0.500  0/60                0.0%                 0             0  no              
+E              0.100  8/60               13.3%                 8             0  no              
+E              0.500  0/60                0.0%                 0             0  no              
+H              0.100  0/60                0.0%                 0             0  no              
+H              0.500  0/60                0.0%                 0             0  no              
+I:C1-fixed     0.100  0/60                0.0%                 0             0  no              
+I:C1-fixed     0.500  0/60                0.0%                 0             0  no              
+I:C1-per-step  0.100  0/60                0.0%                 0             0  no              
+I:C1-per-step  0.500  0/60                0.0%                 0             0  no              
+I:C2-fixed     0.100  0/60                0.0%                 0             0  no              
+I:C2-fixed     0.500  0/60                0.0%                 0             0  no              
+I:C2-per-step  0.100  0/60                0.0%                 0             0  no              
+I:C2-per-step  0.500  0/60                0.0%                 0             0  no              
+I:G-fixed      0.100  0/60                0.0%                 0             0  no              
+I:G-fixed      0.500  0/60                0.0%                 0             0  no              
+I:G-per-step   0.100  0/60                0.0%                 0             0  no              
+I:G-per-step   0.500  0/60                0.0%                 0             0  no              
+I:D            0.100  0/60                0.0%                 0             0  no              
+I:D            0.500  0/60                0.0%                 0             0  no              
+I:H            0.100  0/60                0.0%                 0             0  no              
+I:H            0.500  0/60                0.0%                 0             0  no              
+
+==================
+Candidate set: all
+==================
+option         eps    selection changed  share  admission-driven  score-driven  rewrites records
+-------------  -----  -----------------  -----  ----------------  ------------  ----------------
+F              0.100  0/60                0.0%                 0             0  no              
+F              0.500  0/60                0.0%                 0             0  no              
+A-fixed        0.100  0/60                0.0%                 0             0  yes             
+A-fixed        0.500  0/60                0.0%                 0             0  yes             
+A-per-step     0.100  0/60                0.0%                 0             0  yes             
+A-per-step     0.500  0/60                0.0%                 0             0  yes             
+B-fixed        0.100  10/60              16.7%                 0            10  yes             
+B-fixed        0.500  10/60              16.7%                 0            10  yes             
+B-per-step     0.100  2/60                3.3%                 0             2  yes             
+B-per-step     0.500  2/60                3.3%                 0             2  yes             
+C1-fixed       0.100  0/60                0.0%                 0             0  no              
+C1-fixed       0.500  0/60                0.0%                 0             0  no              
+C1-per-step    0.100  0/60                0.0%                 0             0  no              
+C1-per-step    0.500  0/60                0.0%                 0             0  no              
+C2-fixed       0.100  0/60                0.0%                 0             0  no              
+C2-fixed       0.500  0/60                0.0%                 0             0  no              
+C2-per-step    0.100  0/60                0.0%                 0             0  no              
+C2-per-step    0.500  0/60                0.0%                 0             0  no              
+G-fixed        0.100  0/60                0.0%                 0             0  no              
+G-fixed        0.500  0/60                0.0%                 0             0  no              
+G-per-step     0.100  0/60                0.0%                 0             0  no              
+G-per-step     0.500  0/60                0.0%                 0             0  no              
+D              0.100  0/60                0.0%                 0             0  no              
+D              0.500  0/60                0.0%                 0             0  no              
+E              0.100  8/60               13.3%                 8             0  no              
+E              0.500  0/60                0.0%                 0             0  no              
+H              0.100  0/60                0.0%                 0             0  no              
+H              0.500  0/60                0.0%                 0             0  no              
+I:C1-fixed     0.100  0/60                0.0%                 0             0  no              
+I:C1-fixed     0.500  0/60                0.0%                 0             0  no              
+I:C1-per-step  0.100  0/60                0.0%                 0             0  no              
+I:C1-per-step  0.500  0/60                0.0%                 0             0  no              
+I:C2-fixed     0.100  0/60                0.0%                 0             0  no              
+I:C2-fixed     0.500  0/60                0.0%                 0             0  no              
+I:C2-per-step  0.100  0/60                0.0%                 0             0  no              
+I:C2-per-step  0.500  0/60                0.0%                 0             0  no              
+I:G-fixed      0.100  0/60                0.0%                 0             0  no              
+I:G-fixed      0.500  0/60                0.0%                 0             0  no              
+I:G-per-step   0.100  0/60                0.0%                 0             0  no              
+I:G-per-step   0.500  0/60                0.0%                 0             0  no              
+I:D            0.100  0/60                0.0%                 0             0  no              
+I:D            0.500  0/60                0.0%                 0             0  no              
+I:H            0.100  0/60                0.0%                 0             0  no              
+I:H            0.500  0/60                0.0%                 0             0  no              
